@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SQ_Project.props" />
+</Project>
