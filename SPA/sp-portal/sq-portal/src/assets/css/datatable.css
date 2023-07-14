@@ -1,0 +1,198 @@
+
+
+/*  06. Table
+/*----------------------------------------*/
+
+.ui-table-wrapper {
+    padding: 0 20px;
+    background: #fff;
+  }
+  
+  .ui-table {
+    background: #ffffff;
+  }
+  
+  .ui-table .ui-table-thead>tr>th {
+    padding: 5px;
+    font-size: 13px;
+  }
+  
+  .ui-table .ui-table-tbody>tr {
+    background: #f9f9f9;
+  }
+  
+  .ui-table .ui-table-tbody>tr:nth-child(even) {
+    background: #ffffff;
+  }
+  
+  .ui-table .ui-table-tbody>tr>td {
+    padding: 5px;
+    font-size: 12px;
+    color: #616161;
+  }
+  
+  .ui-table .ui-table-caption {
+    background: #E0E0E0;
+  }
+  
+  .ui-table .ui-table-thead>tr>th {
+    background-color: #235EAA;
+    color: #fff;
+  }
+  
+  .ui-table .ui-table-caption {
+    background: #ffffff;
+    padding: 15px 20px;
+    border: none;
+  }
+  
+  .ui-table .ui-table-thead>tr>th {
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 15px 0 10px 0;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+  }
+  
+  .ui-table .ui-table-tbody>tr>td {
+    color: #4d4d44;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 10px 0 10px 0;
+    border: none;
+    /* vertical-align: top; */
+    border-bottom: 1px solid #cccccc;
+  }
+  
+  .ui-table .ui-table-tbody>tr>td:last-child {
+    vertical-align: middle;
+  }
+  
+  .ui-table .ui-table-tbody>tr>td>ul>li {
+    margin-right: 24px;
+  }
+  
+  .ui-table .ui-table-tbody>tr>td>ul>li>a>i {
+    color: #808080;
+    font-size: 20px;
+  }
+  
+  .ui-table .ui-table-tbody>tr>td>ul>li>a>div {
+    margin-right: 15px;
+    position: relative;
+    top: 7px;
+  }
+  
+  
+  /*----------------------------------------*/
+  
+  
+  /*  08. Pagination
+  /*----------------------------------------*/
+  
+  .ui-paginator {
+    background-color: #ffffff;
+    border: none;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: right !important;
+    margin: 0 20px;
+    border-bottom: 1px solid #cccccc;
+  }
+  
+  .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+    background: transparent;
+    color: #333333;
+    font-weight: 600;
+  }
+  
+  .ui-paginator .ui-paginator-pages .ui-paginator-page:not(.ui-state-active):hover {
+    background: transparent;
+    color: #848484;
+  }
+  
+  .ui-paginator .ui-paginator-pages .ui-paginator-page:focus {
+    box-shadow: none;
+  }
+  
+  .ui-paginator .ui-paginator-first:not(.ui-state-disabled):not(.ui-state-active):hover,
+  .ui-paginator .ui-paginator-prev:not(.ui-state-disabled):not(.ui-state-active):hover,
+  .ui-paginator .ui-paginator-next:not(.ui-state-disabled):not(.ui-state-active):hover,
+  .ui-paginator .ui-paginator-last:not(.ui-state-disabled):not(.ui-state-active):hover {
+    background: transparent;
+    color: #848484;
+  }
+  
+  .ui-paginator .ui-paginator-first:focus,
+  .ui-paginator .ui-paginator-prev:focus,
+  .ui-paginator .ui-paginator-next:focus,
+  .ui-paginator .ui-paginator-last:focus {
+    box-shadow: none;
+  }
+  
+  .ui-paginator .ui-dropdown {
+    margin-left: 0;
+    height: auto;
+    min-width: auto;
+    width: fit-content;
+  }
+  
+  .ui-paginator .ui-dropdown .ui-dropdown-panel {
+    width: fit-content;
+    top: 32px !important;
+    left: 0 !important;
+    min-width: fit-content;
+  }
+  
+  .ui-paginator .ui-dropdown:not(.ui-state-disabled):hover {
+    border: 0px;
+  }
+  
+  
+  /*----------------------------------------*/
+  
+  
+  /*  08. Message
+  /*----------------------------------------*/
+  
+  .ui-message {
+    padding: 0;
+    margin: 0;
+    float: right;
+  }
+  
+  .ui-message.ui-message-error {
+    color: #DD7781;
+    background-color: transparent;
+    border: 0 none;
+  }
+  
+  .ui-message .ui-message-text {
+    font-size: 12px !important;
+  }
+  
+  .ui-message.ui-message-error .ui-message-icon {
+    display: none;
+  }
+  
+  .md-24 {
+    font-size: 24px;
+  }
+  
+  .right {
+    float: right;
+  }
+  
+  .search-border:focus {
+    outline: none !important;
+    border: 1px solid green;
+  }
+  
+  .text-truncate{
+    white-space: nowrap; 
+    text-overflow:ellipsis; 
+    overflow: hidden; 
+    max-width:1px;
+  }

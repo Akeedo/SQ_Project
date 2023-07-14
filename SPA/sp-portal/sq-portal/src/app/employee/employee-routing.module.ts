@@ -5,12 +5,9 @@ import { EmployeeListComponent } from './components/employee-list/employee-list.
 const routes: Routes = [
   {
     path: "",
-    children: [
-      {
-        path: "",
-        component: EmployeeListComponent,
-      }
-    ],
+    component: EmployeeListComponent,
+      
+   
   },
 ];
 @NgModule({

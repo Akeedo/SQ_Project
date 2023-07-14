@@ -1,0 +1,27 @@
+/*----------------------------------------*/
+/*  02. All Content
+/*----------------------------------------*/
+.all-content-wrapper, .content-wrapper {
+    margin-left: 256px;
+    transition: all 0.3s;
+}
+
+.content-wrapper{
+    margin-top: 54px;
+}
+
+.web-content-wrapper {
+  margin-top: 67px;
+  transition: all 0.3s;
+  padding-bottom: 70px;
+}
+
+.page-title {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 24px;
+  }
+  .page-title span{
+    font-weight: 300;
+  }

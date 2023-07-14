@@ -16,8 +16,6 @@ namespace SQ_Project.Controllers
             _repository = repository;
         }
 
-
-        [Authorize]
         [HttpGet]
         public async Task<IEnumerable<Employee>> GetEmployees()
         {
@@ -37,7 +35,7 @@ namespace SQ_Project.Controllers
             return employee;
         }
 
-        [Authorize]
+ 
         [HttpPost]
         public async Task<ActionResult<Employee>> AddEmployee(Employee employee)
         {
@@ -46,7 +44,7 @@ namespace SQ_Project.Controllers
             return CreatedAtAction(nameof(GetEmployee), new { id = newEmployee.id }, newEmployee);
         }
 
-        [Authorize]
+ 
         [HttpPut("{id}")]
         public async Task<ActionResult<Employee>> UpdateEmployee(int id, Employee employee)
         {
@@ -58,7 +56,6 @@ namespace SQ_Project.Controllers
             return await _repository.UpdateEmployee(employee);
         }
 
-        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Employee>> DeleteEmployee(int id)
         {
