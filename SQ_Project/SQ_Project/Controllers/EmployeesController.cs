@@ -6,7 +6,7 @@ using SQ_Project.Repository;
 namespace SQ_Project.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v1/[controller]")]
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeRepository _repository;
