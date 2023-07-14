@@ -1,0 +1,9 @@
+.btn.focus, .btn:focus{
+    box-shadow: none;
+}
+
+.btn:not(:disabled):not(.disabled).active:focus, 
+.btn:not(:disabled):not(.disabled):active:focus, 
+.show>.btn.dropdown-toggle:focus{
+    box-shadow: none;
+}

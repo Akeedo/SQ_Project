@@ -1,0 +1,19 @@
+.otp-area {
+  background: #ffffff;
+  padding: 20px 20px;
+  border-radius: 3px;
+  box-shadow: 0 0px 0px rgba(0,0,0,0.19), 0 0px 5px 2px rgba(0,0,0,0.23);
+}
+
+.pb-20 {
+  padding-bottom: 20px;
+}
+.sign-in-up {
+  padding-top:0px;
+}
+
+
+.form-control:focus {
+  border-color: #498E4D;
+  /* box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); */
+} 

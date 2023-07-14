@@ -1,0 +1,135 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row pb-4">
+                <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 100px;">
+                    <p-breadcrumb [model]="items"></p-breadcrumb>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+            </div>
+            <div class="card p-3">
+                <form [formGroup]="userGroup" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="required" for="name">Full Name</label>
+                                <input class="inputfield w-full" formControlName="name" id="name" pInputText
+                                    placeholder="{{'User\'\s Name' }}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="userId">Login ID</label>
+                                <textarea class="inputfield w-full" formControlName="userId" id="userId" pInputText
+                                    placeholder="{{'User Login ID' }}" type="text"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="password">Password</label>
+                                <p-password class="inputfield w-full" formControlName="password" id="password"
+                                    [toggleMask]="true"></p-password>
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="roleOid">Role</label>
+                                <p-dropdown [options]="roleList" [showClear]="true" formControlName="roleOid"
+                                    id="roleOid" optionLabel="roleId" optionValue="roleOid" placeholder="Select Role">
+                                </p-dropdown>
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="siteName">Site name</label>
+                                <p-dropdown [options]="userAccessList" [(ngModel)]="siteJson" [showClear]="true"
+                                    formControlName="siteOid" id="siteOid" optionLabel="siteName" optionValue="siteOid"
+                                    defaultLabel="Select a Site" placeholder="Select Site name"
+                                    display="chip"></p-dropdown>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input class="inputfield w-full" formControlName="email" id="email" pInputText
+                                    placeholder="{{'User\'\s Email Address' }}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="mobileNo">Mobile Number</label>
+                                <input class="inputfield w-full" formControlName="mobileNo" id="mobileNo" pInputText
+                                    placeholder="{{'User\'\s Mobile Number' }}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input class="inputfield w-full" formControlName="address" id="address" pInputText
+                                    placeholder="{{'User\'\s Address' }}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="status">Status</label>
+                                <p-dropdown [options]="userStatusList" [showClear]="true" formControlName="status"
+                                    id="status" optionLabel="name" optionValue="oid" placeholder="Role Status">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="form-group d-flex justify-content-center">
+                    <button (click)="onCancel()" class="p-button-info btn-cancel mr-3" icon="pi pi-times"
+                        label="{{'Cancel'}}" pButton pRipple type="button">
+                    </button>
+                    <button (click)="onSubmit()" class="p-button-info" icon="pi pi-check" label="{{'Save'}}" pButton
+                        pRipple type="button">
+                    </button>
+                </div>
+            </div>
+
+            <div *ngIf="this.showMenuDataJson" class="card p-3" style="margin-top: 3%;">
+                <div class="row p-5">
+                    <div class="col-md-6">
+                        <form [formGroup]="userGroup" novalidate>
+                            <div class="form-group">
+                                <ul class="tree">
+                                    <li *ngFor="let parent of jsonMenuList; let i = index">
+                                        <div class="md-checkbox">
+                                            <input id="{{'p' + i}}" [name]="parent.name" type="checkbox"
+                                                (change)="updateEnable(parent)" [checked]="parent.enable">
+                                            <label for="{{'p' + i}}">{{parent.name}} </label>
+                                        </div>
+                                        <ul *ngIf="parent.children">
+                                            <li *ngFor="let child of parent.children; let j = index">
+                                                <div class="md-checkbox"
+                                                    style="display: flex; align-items: center; cursor: default">
+                                                    <input id="{{'c' + i + j}}" [name]="child.name"
+                                                        (change)="updateEnable(child)" type="checkbox"
+                                                        [checked]="child.enable" style="cursor: pointer">
+                                                    <label
+                                                        style="margin-bottom: 0px; margin-left: 5px; cursor: pointer;"
+                                                        for="{{'c' + i + j}}">{{child.name}} </label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- <div class="col-md-6">
+                        <div class="">
+                            <label class="required">User Access</label>
+                            <p-multiSelect [options]="userAccessList" [(ngModel)]="siteJson"
+                                optionLabel="siteName" optionValue="siteOid" defaultLabel="Select a Site"
+                                display="chip"></p-multiSelect>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="form-group d-flex justify-content-center">
+                    <button (click)="onCancel()" class="p-button-info btn-cancel mr-3" icon="pi pi-times"
+                        label="{{'Cancel'}}" pButton pRipple type="button">
+                    </button>
+                    <button (click)="onSubmit()" class="p-button-info" icon="pi pi-check" label="{{'Update'}}" pButton
+                        pRipple type="button">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast position="top-right"></p-toast>

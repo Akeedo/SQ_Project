@@ -1,0 +1,183 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row pb-4">
+                <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 100px;">
+                    <p-breadcrumb [model]="items"></p-breadcrumb>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+            </div>
+            <div class="card p-3">
+                <form [formGroup]="issueGroup" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="required" for="issueName">Issue Name</label>
+                                <input class="inputfield w-full" formControlName="issueName" id="issueName" pInputText
+                                    placeholder="{{'Issue\'\s Name' }}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="reportedProblem">Reported problem</label>
+                                <textarea class="inputfield w-full" formControlName="reportedProblem"
+                                    id="reportedProblem" pInputText placeholder="{{'Reported problem' }}"
+                                    type="text"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="reportedDate">Reported date</label>
+                                <p-calendar [maxDate]="today" [minDate]="minDate" [monthNavigator]="true"
+                                    [showIcon]="true" [yearNavigator]="true" dateFormat="dd/mm/yy"
+                                    formControlName="reportedDate" id="reportedDate"
+                                    placeholder="{{'Asset log Reported date' }}"
+                                    (onSelect)="problemDateValidation('reportedDate')"
+                                    [yearRange]="minDateYear+':'+minDateYear"></p-calendar>
+                                <!-- <span class="text-danger" style="font-size: 12px">
+                                    reported Date is mandatory.
+                                </span> -->
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="issueType">Issue type</label>
+                                <p-dropdown [options]="issueTypeList" [showClear]="true" formControlName="issueType"
+                                    id="issueType" optionLabel="issueTypeName" optionValue="issueTypeValue"
+                                    placeholder="Select Issue type">
+                                </p-dropdown>
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="issueStatus">Issue status</label>
+                                <p-dropdown [options]="issueStatusList" (onChange)="onStatusChange($event)"
+                                    [showClear]="true" formControlName="issueStatus" id="issueStatus"
+                                    placeholder="Select Issue status" optionLabel="issueStatusName"
+                                    optionValue="issueStatusValue">
+                                </p-dropdown>
+                            </div>
+                            <div class="form-group" *ngIf="this.showDivResolving">
+                                <label class="required" for="findOutProblem">Find out problem</label>
+                                <textarea class="inputfield w-full" formControlName="findOutProblem" id="findOutProblem"
+                                    pInputText placeholder="{{'Enter finding problem' }}" type="text"></textarea>
+                            </div>
+                            <div class="form-group" *ngIf="this.showDivResolving">
+                                <label class="required" for="solutionProvider">Solution provider</label>
+                                <textarea class="inputfield w-full" formControlName="solutionProvider"
+                                    id="solutionProvider" pInputText placeholder="{{'Enter solution provider' }}"
+                                    type="text"></textarea>
+                            </div>
+                            <div class="form-group" *ngIf="this.showDivResolving">
+                                <label class="required" for="solutionCost">Solution cost</label>
+                                <textarea class="inputfield w-full" formControlName="solutionCost" id="solutionCost"
+                                    pInputText placeholder="{{'Enter solution cost' }}" type="text"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="issueDetails">Issue details</label>
+                                <input class="inputfield w-full" formControlName="issueDetails" id="issueDetails"
+                                    pInputText placeholder="{{'Issue\'\s details' }}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="priority">Priority</label>
+                                <p-dropdown [options]="priorityList" [showClear]="true" formControlName="priority"
+                                    id="priority" optionLabel="priorityName" optionValue="priorityValue"
+                                    placeholder="Priority">
+                                    pInputText placeholder="{{'Select Priority' }}"
+                                </p-dropdown>
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="problemDate">Problem date</label>
+                                <p-calendar [maxDate]="today" [minDate]="minDate" [monthNavigator]="true"
+                                    [showIcon]="true" [yearNavigator]="true" dateFormat="dd/mm/yy"
+                                    formControlName="problemDate" id="problemDate"
+                                    placeholder="{{'Asset log Problem date' }}"
+                                    (onSelect)="problemDateValidation('problemDate')"
+                                    [yearRange]="minDateYear+':'+minDateYear"></p-calendar>
+                                <!-- <span
+                                    *ngIf="assetDateForm?.controls?.assetReceiveDate?.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                    class="text-danger" style="font-size: 12px">
+                                    Received Date is mandatory.
+                                </span> -->
+                            </div>
+                            <div class="form-group">
+                                <label for="remarks">Remarks</label>
+                                <input class="inputfield w-full" formControlName="remarks" id="remarks" pInputText
+                                    placeholder="{{'Remarks' }}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="estimatedCost">Estimated cost</label>
+                                <input class="inputfield w-full" formControlName="estimatedCost" id="estimatedCost"
+                                    pInputText placeholder="{{'Estimated cost' }}" type="text">
+                            </div>
+
+                            <div class="form-group" *ngIf="this.showDivResolving">
+                                <label class="required" for="solution">Solution</label>
+                                <textarea class="inputfield w-full" formControlName="solution" id="solution" pInputText
+                                    placeholder="{{'Enter solution' }}" type="text"></textarea>
+                            </div>
+                            <div class="form-group" *ngIf="this.showDivResolving">
+                                <label class="required" for="solutionDate">Solution date</label>
+                                <p-calendar [maxDate]="today" [minDate]="minDate" [monthNavigator]="true"
+                                    [showIcon]="true" [yearNavigator]="true" dateFormat="dd/mm/yy"
+                                    formControlName="solutionDate" id="solutionDate"
+                                    placeholder="{{'Asset log Solution date' }}"
+                                    (onSelect)="solutionDateValidation('solutionDate')"
+                                    [yearRange]="minDateYear+':'+minDateYear"></p-calendar>
+                                <!-- <span
+                                    *ngIf="assetDateForm?.controls?.assetReceiveDate?.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                    class="text-danger" style="font-size: 12px">
+                                    Received Date is mandatory.
+                                </span> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid" style="background-color: rgb(12, 205, 215);"
+                        *ngIf="this.showDivOngoing">
+                        <div class="row">
+                            <div class="col">
+                                Asset: {{ this.currentAssetInfo.assetName }}
+                            </div>
+                            <div class="col">
+                                Current responsible person: {{ this.currentAssetInfo.assetOwnerName }}
+                            </div>
+                            <div class="col">
+                                Current Asset status: {{ this.currentAssetInfo.assetStatus }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="required" for="assetStatus">Asset status</label>
+                                    <p-dropdown [options]="assetStatusList" [showClear]="true"
+                                        formControlName="assetStatus" id="assetStatus" optionLabel="assetStatusName"
+                                        placeholder="Select Issue status" optionValue="assetStatusValue">
+                                        pInputText placeholder="{{"Select Asset Status Type"}}"
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="required" for="responsiblePerson">Responsible person</label>
+                                    <p-dropdown [options]="responsiblePersonList" [showClear]="true"
+                                        formControlName="responsiblePerson" id="responsiblePerson"
+                                        placeholder="Select Responsible Person" optionLabel="responsiblePersonName"
+                                        optionValue="responsiblePersonValue">
+                                        pInputText placeholder="{{"Select Responsible Person"}}"
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="form-group d-flex justify-content-center">
+                    <button (click)="onCancel()" class="p-button-info btn-cancel mr-3" icon="pi pi-times"
+                        label="{{'Cancel'}}" pButton pRipple type="button">
+                    </button>
+                    <button (click)="onSubmit()" class="p-button-info" icon="pi pi-check" label="{{'Save'}}" pButton
+                        pRipple type="button">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast position="top-right"></p-toast>

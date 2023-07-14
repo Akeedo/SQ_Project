@@ -1,0 +1,52 @@
+<div *ngIf="disableSidebar" class="sidebar-div"></div>
+
+<div class="left-sidebar-pro">
+    <nav id="sidebar" style="background-color: #EA4D2F;">
+        <div class="sidebar-header">
+            <a [routerLink]="[defaultLink]" href="javascript:void(0)">
+                <div class="top-menu-left d-none d-sm-block d-flex justify-content-center"
+                    style="height: 100px; padding-top: 5px; margin-left: -21px;">
+                    <img alt="Customs image" class="img-fluid" src="../../../../assets/images/custom-logo-v3.gif"
+                        style="height: 100px;">    
+                </div>
+            </a>
+        </div>
+        <div class="left-custom-menu-adp-wrap comment-scrollbar" style="background-color: #EA4D2F; font-weight: bolder; font-family: kite-display;font-size: 20px;">
+            <nav class="sidebar-nav left-sidebar-menu-pro">
+                <ul id="metismenu">
+                    <ng-container *ngFor="let item of menuJson; let i = index">
+                        <li *ngIf="resetRequired != 'Yes'" id="{{item}}" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{exact: true}">
+                            <ng-container *ngIf="i==0">
+                                <a  [routerLink]="[item.url]" aria-expanded="false">
+                                    <i [class]="item.icon"></i>
+                                    <span class="mini-click-non">{{item.name | translate}}</span>
+                                </a>
+                            </ng-container>
+                            <ng-container *ngIf="item['children']?.length >= 1">
+                                <a style =font-size:30px; aria-expanded="true" class="has-arrow" href="#" routerLinkActive="active">
+                                     
+                                    <i style="font-size: 25px; color: #333;"
+                                                [class]="item.icon"></i>
+
+                                    <span class="mini-click-non">{{item.name | translate}}</span>
+                                </a>
+                                <ul class="submenu-angle" id="{{i}}">
+                                    <li *ngFor="let child of item?.children" class="submenu"
+                                        routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                        <a style =font-size:14px; [routerLink]="[child.url]" id="{{child.url}}" routerLinkActive="active">
+                                            <i style="font-size: 14px; margin-right: 8px; color: #333;"
+                                                [class]="child.icon"></i>
+                                            <span class="mini-sub-pro" style="color: #333;">{{child.name |
+                                                translate}}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </ng-container>
+                        </li>
+                    </ng-container>
+                </ul>
+            </nav>
+        </div>
+    </nav>
+</div>

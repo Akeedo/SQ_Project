@@ -1,0 +1,25 @@
+{
+
+    "Office_TopMenu": "অফিস",
+    "/offices": "অফিসের তালিকা",
+    "/create-office":"অফিস তৈরি",
+    "Update Office":"আপডেট অফিস",
+    "Office Code":"অফিস কোড",
+    "Office Name":"অফিসের নাম",
+    "Update":"আপডেট",
+    "OfficeSection_TopMenu":"অফিস",
+    "/office_sections": "অফিসের তালিকা",
+     
+    "/dashboard": "dashboard",
+    "role": "Role",
+    "users": "Users",
+
+    
+    "Change Password": "Change Password",
+    "Confirm Password required": "Confirm Password required",
+    "Confirm Password": "Confirm Password",
+    "Confirm Your New Password": "Confirm Your New Password",
+    "Congratulations": "Congratulations"
+
+
+}

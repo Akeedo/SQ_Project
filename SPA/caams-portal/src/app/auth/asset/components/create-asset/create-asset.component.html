@@ -1,0 +1,969 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+
+<div class="container-fluid" style="margin-top: 2%;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-title col-md-12"
+                style="color: #1A3C40; font-weight: 900; font-size: 22px; padding-top: 45px;">
+                <p-breadcrumb [model]="items"></p-breadcrumb>
+                <br />
+                {{'Add Asset Form'}}
+            </div>
+
+            <div class="card">
+                <p-tabView [(activeIndex)]="index">
+                    <p-tabPanel header="General">
+                        <form [formGroup]="assetGeneralForm" novalidate>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="required" for="assetName">Asset Name</label>
+                                        <input class="inputfield w-full" formControlName="assetName" id="assetName"
+                                            pInputText placeholder="{{'Asset Name' }}" type="text">
+                                        <span
+                                            *ngIf="assetGeneralForm?.controls?.assetName?.errors?.required && assetGeneralForm?.controls?.assetName?.touched"
+                                            class="text-danger" style="font-size: 12px">
+                                            Asset Name is mandatory.
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="required" for="siteOid">Site</label>
+                                        <p-dropdown [options]="siteList" [showClear]="true" formControlName="siteOid"
+                                            id="siteOid" optionLabel="siteName" optionValue="siteOid"
+                                            (onChange)="getSubSiteList($event.value)" placeholder="Select Site"
+                                            [filter]="true">
+                                        </p-dropdown>
+                                        <span
+                                            *ngIf="assetGeneralForm?.controls?.siteOid?.errors?.required && assetGeneralForm?.controls?.assetName?.touched"
+                                            class="text-danger" style="font-size: 12px;">
+                                            Site is mandatory..
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="" for="subSiteOid">Sub Site</label>
+                                        <p-dropdown [options]="subSiteList" [showClear]="true"
+                                            formControlName="subSiteOid" id="subSiteOid" optionLabel="subSiteName"
+                                            optionValue="subSiteOid" placeholder="Select Sub-Site" [filter]="true">
+                                        </p-dropdown>
+                                        <span
+                                            *ngIf="assetGeneralForm?.controls?.subSiteOid?.errors?.required && assetGeneralForm?.controls?.assetName?.touched"
+                                            class="text-danger" style="font-size: 12px">
+                                            Sub Site is mandatory.
+                                        </span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="required" for="vendorOid">Vendor</label>
+                                        <p-dropdown [options]="vendorList" [showClear]="true"
+                                            formControlName="vendorOid" id="vendorOid" optionLabel="vendorName"
+                                            optionValue="vendorOid" placeholder="Select Vendor" [filter]="true">
+                                        </p-dropdown>
+                                        <span
+                                            *ngIf="assetGeneralForm?.controls?.vendorOid?.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                            class="text-danger" style="font-size: 12px">
+                                            Vendor is mandatory.
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="modalClass" style="display: flex; gap:20px; margin-bottom: 20px;">
+                                            <label class="required" for="assetCategoryTypeOid">Package</label>
+                                            <div style="text-align: left">
+                                                <p-dialog
+                                                header="Add Package"
+                                                [(visible)]="BasicShow"
+                                                [style]="{width: '30vw'}"
+                                                [draggable]="false"
+                                                [resizable]="false"
+                                                class="reply-modal"
+                                                [contentStyle]="{ 'overflow-y': 'hidden','overflow-x': 'hidden'}">
+                                                    <div class="row row-centered">
+                                                        <form novalidate>
+                                                            
+                                                            <input type="text" class="form-control  modal-input" [(ngModel)]="packageFromModal" name="packageFromModal" size="70"/>
+                                                            
+                                                        </form>
+                                                    </div>
+                                                    <ng-template pTemplate="footer">
+                                                        <p-button
+                                                            (click)="BasicShow = false"
+                                                            label="Cancel"
+                                                            styleClass="btn btn-lg btn-cancel reply-btn">
+                                                        </p-button>
+                                                        <p-button
+                                                            (click)="savePackage()"
+                                                            label="Accept"
+                                                            styleClass="btn btn-lg btn-success reply-btn">
+                                                        </p-button>
+                                                    </ng-template>
+                                                </p-dialog>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row row-modal">
+                                            <div class="col-11">
+                                                <p-dropdown [options]="packageList" [showClear]="true"
+                                                formControlName="assetCategoryTypeOid" id="assetCategoryTypeOid"
+                                                optionLabel="assetCategoryTypeName" optionValue="assetCategoryTypeOid"
+                                                placeholder="Select Package" [filter]="true">
+                                            </p-dropdown>
+                                            <span
+                                                *ngIf="assetGeneralForm?.controls?.assetCategoryTypeOid?.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                                class="text-danger" style="font-size: 12px">
+                                                Package is mandatory.
+                                            </span>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <p-button
+                                                    class="custom-plus-design"
+                                                    (click)="showDialog()"
+                                                    icon="pi pi-plus"> 
+                                                    </p-button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="required" for="assetProductSerial">Product Serial</label>
+                                        <input class="inputfield w-full" formControlName="assetProductSerial"
+                                            id="assetProductSerial" pInputText placeholder="{{'Product Serial' }}"
+                                            type="text">
+                                        <span
+                                            *ngIf="assetGeneralForm?.controls?.assetProductSerial?.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                            class="text-danger" style="font-size: 12px">
+                                            Product Serial is mandatory.
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label for="assetLocation">Location</label>
+                                        <input class="inputfield w-full" formControlName="assetLocation"
+                                            id="assetLocation" pInputText placeholder="{{'Location' }}" type="text">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="assetReferenceNumberOfTender"> Ref. No./Chalan No./Lot No.
+                                        </label>
+                                        <input class="inputfield w-full" formControlName="assetReferenceNumberOfTender"
+                                            id="assetReferenceNumberOfTender" pInputText
+                                            placeholder="{{'Ref. No./Chalan No./Lot No.' }}" type="text">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="" for="assetPartNo">Part Number</label>
+                                        <input class="inputfield w-full" formControlName="assetPartNo" id="assetPartNo"
+                                            pInputText placeholder="{{'Part Number' }}" type="text">
+                                        <span *ngIf="assetGeneralForm?.controls?.assetPartNo?.errors?.required"
+                                            class="text-danger" style="font-size: 12px">
+                                            Part Number is mandatory.
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="assetCsiNumber">CSI/CON Number</label>
+                                        <input class="inputfield w-full" formControlName="assetCsiNumber"
+                                            id="assetCsiNumber" pInputText placeholder="{{'Asset CSI/CON Number' }}"
+                                            type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="" for="assetReceivedBy">Received By</label>
+                                        <input class="inputfield w-full" formControlName="assetReceivedBy"
+                                            id="assetReceivedBy" pInputText placeholder="{{'Enter Received By' }}"
+                                            type="text">
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12 d-flex justify-content-center">
+                                <button (click)="nextTab()" class="p-button-info" icon="pi pi-arrow-right"
+                                    pTooltip="next" pButton pRipple type="button">
+                                </button>
+                            </div>
+                        </form>
+                    </p-tabPanel>
+                    <p-tabPanel header="Dates">
+                        <form [formGroup]="assetDateForm" novalidate>
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label class="required" for="assetReceiveDate">Received Date</label>
+                                        <p-calendar [maxDate]="today" [minDate]="minDate" [monthNavigator]="true"
+                                            [showIcon]="true" [yearNavigator]="true" dateFormat="dd/mm/yy"
+                                            formControlName="assetReceiveDate" id="assetReceiveDate"
+                                            placeholder="{{'Asset Received Date' }}"
+                                            [yearRange]="minDateYear+':'+maxDateYear"></p-calendar>
+                                        <span
+                                            *ngIf="assetDateForm?.controls?.assetReceiveDate?.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                            class="text-danger" style="font-size: 12px">
+                                            Received Date is mandatory.
+                                        </span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="required" for="assetWarrantyStartDate">Warranty Start Date</label>
+                                        <p-calendar [maxDate]="maxDate" [minDate]="minDate" [monthNavigator]="true"
+                                            [showIcon]="true" [yearNavigator]="true" dateFormat="dd/mm/yy"
+                                            formControlName="assetWarrantyStartDate" id="assetWarrantyStartDate"
+                                            placeholder="{{'Warranty Start Date' }}"
+                                            (onSelect)="warrantyDateValidation('assetWarrantyStartDate')"
+                                            [yearRange]="minDateYear+':'+maxDateYear"></p-calendar>
+                                        <span
+                                            *ngIf="assetDateForm?.controls?.assetWarrantyStartDate.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                            class="text-danger" style="font-size: 12px">
+                                            Warranty Start Date is mandatory.
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="required" for="assetWarrantyEndDate">Warranty End Date</label>
+                                        <p-calendar [maxDate]="maxDate" [minDate]="minDate" [monthNavigator]="true"
+                                            [showIcon]="true" [yearNavigator]="true" dateFormat="dd/mm/yy"
+                                            formControlName="assetWarrantyEndDate" id="assetWarrantyEndDate"
+                                            placeholder="{{'Warranty End Date' }}"
+                                            (onSelect)="warrantyDateValidation('assetWarrantyEndDate')"
+                                            [yearRange]="minDateYear+':'+maxDateYear"></p-calendar>
+                                        <span
+                                            *ngIf="assetDateForm?.controls?.assetWarrantyEndDate?.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                            class="text-danger" style="font-size: 12px">
+                                            Warranty End Date is mandatory.
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="" for="assetLicenseStartDate">License Start Date</label>
+                                        <p-calendar [maxDate]="maxDate" [minDate]="minDate" [monthNavigator]="true"
+                                            [showIcon]="true" [yearNavigator]="true" dateFormat="dd/mm/yy"
+                                            formControlName="assetLicenseStartDate" id="assetLicenseStartDate"
+                                            placeholder="{{'License Start Date' }}"
+                                            (onSelect)="licenseDateValidation('assetLicenseStartDate')"
+                                            [yearRange]="minDateYear+':'+maxDateYear"></p-calendar>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="" for="assetLicenseEndDate">License End Date</label>
+                                        <p-calendar [maxDate]="maxDate" [minDate]="minDate" [monthNavigator]="true"
+                                            [showIcon]="true" [yearNavigator]="true" dateFormat="dd/mm/yy"
+                                            formControlName="assetLicenseEndDate" id="assetLicenseEndDate"
+                                            placeholder="{{'License End Date' }}"
+                                            (onSelect)="licenseDateValidation('assetLicenseEndDate')"
+                                            [yearRange]="minDateYear+':'+maxDateYear"></p-calendar>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12 d-flex justify-content-center">
+                                <button (click)="prevTab()" class="p-button-info mr-3" pTooltip="previous"
+                                    icon="pi pi-arrow-left" pButton pRipple type="button">
+                                </button>
+                                <button (click)="nextTab()" class="p-button-info" icon="pi pi-arrow-right"
+                                    pTooltip="next" pButton pRipple type="button">
+                                </button>
+                            </div>
+                        </form>
+                    </p-tabPanel>
+                    <p-tabPanel header="Specifications">
+                        <form [formGroup]="assetSpecificationForm" novalidate>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="required" for="manufacturerOid">Manufacturer</label>
+                                        <p-dropdown [options]="manufacturerList" [showClear]="true"
+                                            formControlName="manufacturerOid" id="manufacturerOid"
+                                            optionLabel="manufacturerName" optionValue="manufacturerOid"
+                                            placeholder="Select Manufacturer" [filter]="true">
+                                        </p-dropdown>
+                                        <span
+                                            *ngIf="assetSpecificationForm?.controls?.manufacturerOid.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                            class="text-danger" style="font-size: 12px">
+                                            Manufacturer is mandatory.
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="modalClass" style="display: flex; gap:20px; margin-bottom: 20px; margin-top:-15px;">
+                                            <label class="required label-design-for-modal" for="assetCategoryOid">Category</label>
+                                                <div style="text-align: left">
+                                                    <p-dialog
+                                                    header="Add Asset Category"
+                                                    [(visible)]="BasicShow"
+                                                    [style]="{width: '30vw'}"
+                                                    [draggable]="false"
+                                                    [resizable]="false"
+                                                    [contentStyle]="{ 'overflow-y': 'hidden','overflow-x': 'hidden'}"
+                                                    class="reply-modal">
+                                                        <div class="row row-centered">
+                                                            <form novalidate>
+                                                                <input class="form-control modal-input" [(ngModel)]="assetCategoryFromModal" name="assetCategoryFromModal" size="70">
+                                                            </form>
+                                                        </div>
+                                                        <ng-template pTemplate="footer">
+                                                            <p-button
+                                                                (click)="BasicShow = false"
+                                                                label="Cancel"
+                                                                styleClass="btn btn-lg btn-cancel reply-btn">
+                                                            </p-button>
+                                                            <p-button
+                                                                (click)="saveAssetCategory()"
+                                                                label="Accept"
+                                                                styleClass="btn btn-lg btn-success reply-btn">
+                                                            </p-button>
+                                                        </ng-template>
+                                                    </p-dialog>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row row-modal-category">
+                                                <div class="col-11">
+                                                    <p-dropdown [options]="assetCategoryList" [showClear]="true"
+                                                        formControlName="assetCategoryOid" id="assetCategoryOid"
+                                                        optionLabel="assetCategoryName" optionValue="assetCategoryOid"
+                                                        (onChange)="fetchAssetCategoryById($event.value)"
+                                                        placeholder="Select Category" [filter]="true">
+                                                    </p-dropdown>
+                                                    <span
+                                                        *ngIf="assetSpecificationForm?.controls?.assetCategoryOid.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                                        class="text-danger" style="font-size: 12px">
+                                                        Category is mandatory.
+                                                    </span>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <p-button
+                                                    class="custom-plus-design"
+                                                    (click)="showDialog()"
+                                                    icon="pi pi-plus"> 
+                                                    </p-button>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="" for="assetModelOid">Model</label>
+                                        <p-dropdown [options]="modelList" [showClear]="true"
+                                            formControlName="assetModelOid" id="assetModelOid"
+                                            optionLabel="assetModelName" optionValue="assetModelOid"
+                                            placeholder="Select Model" [filter]="true">
+                                        </p-dropdown>
+                                        <span
+                                            *ngIf="assetSpecificationForm?.controls?.assetModelOid.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                            class="text-danger" style="font-size: 12px">
+                                            Model is mandatory.
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-12" style="color: #1A3C40; font-weight: 900; font-size: 12px;">
+                                        <p-panel header="Mandatory Specifications & Configurations:"
+                                            [toggleable]="false"
+                                            *ngIf="specialConfigJson!=null && specialConfigJson?.length>0 && desktopLaptopExist">
+
+                                            <div class="row" *ngFor="let scj of specialConfigJson; let i=index"
+                                                style="margin-left: 2%;">
+                                                <div class="form-group col-md-12">
+
+                                                    <input class="inputfield w-full col-md-5" [(ngModel)]="scj.title"
+                                                        [ngModelOptions]="{standalone: true}" pInputText
+                                                        placeholder="Title" type="text" style="margin-right: 1%;"
+                                                        style="color: black; font-weight: bolder; margin-right: 2%;"
+                                                        [disabled]="'disabled'">
+                                                    <input class="inputfield w-full col-md-5" [(ngModel)]="scj.value"
+                                                        [ngModelOptions]="{standalone: true}" pInputText
+                                                        placeholder="Value" type="text" style="margin-right: 1%;">
+
+
+                                                    <div class=" text-danger"
+                                                        *ngIf="scj.title=='Operating System (OS)' &&  scj.value.length<1"
+                                                        style="position: relative; margin-left: 46%;">
+                                                        Operating System (OS) Value is mandatory.
+                                                    </div>
+                                                    <div class=" text-danger"
+                                                        *ngIf="scj.title=='RAM (GB)' &&  scj.value.length<1"
+                                                        style="position: relative; margin-left: 46%;">
+                                                        RAM (GB) Value is mandatory.
+                                                    </div>
+                                                    <div class=" text-danger"
+                                                        *ngIf="scj.title=='HDD (GB)' &&  scj.value.length<1"
+                                                        style="position: relative; margin-left: 46%;">
+                                                        HDD (GB) Value is mandatory.
+                                                    </div>
+                                                    <div class=" text-danger"
+                                                        *ngIf="scj.title=='Processor' &&  scj.value.length<1"
+                                                        style="position: relative; margin-left: 46%;">
+                                                        Processor Value is mandatory.
+                                                    </div>
+                                                    <div class=" text-danger"
+                                                        *ngIf="scj.title=='Generation' &&  scj.value.length<1"
+                                                        style="position: relative; margin-left: 46%;">
+                                                        Generation Value is mandatory.
+                                                    </div>
+                                                    <div class=" text-danger"
+                                                        *ngIf="scj.title=='Mega Hertz' &&  scj.value.length<1"
+                                                        style="position: relative; margin-left: 46%;">
+                                                        Mega Hertz Value is mandatory.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </p-panel>
+                                    </div>
+                                    <div class="col-md-12 pt-4"
+                                        style="color: #1A3C40; font-weight: bolder; font-size: 16px; margin-left: 5%;">
+                                        Additional Specifications & Configurations:
+                                        <span style="margin-left: 5%;">
+
+                                            <button (click)="spanBasicSpec()" class="p-button-info" icon="pi pi-plus"
+                                                *ngIf="basicSpecs?.length<1" pButton pRipple>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <br />
+                                    <div *ngFor="let bs of basicSpecs; let i=index">
+                                        <div class="form-group col-md-12">
+
+                                            <input class="inputfield w-full col-md-5" [(ngModel)]="bs.title"
+                                                [ngModelOptions]="{standalone: true}" pInputText placeholder="Title"
+                                                type="text" style="margin-right: 1%;"
+                                                style="color: black; font-weight: bolder; margin-right: 2%;">
+                                            <input class="inputfield w-full col-md-5" [(ngModel)]="bs.value"
+                                                [ngModelOptions]="{standalone: true}" pInputText placeholder="Value"
+                                                type="text" style="margin-right: 1%;">
+                                            <button (click)="removeBasicSpec(i)"
+                                                class="p-button-info btn-cancel col-md-1" pTooltip="Delete"
+                                                icon="pi pi-trash" pButton pRipple type="button">
+                                            </button>
+                                            <button *ngIf="i+1===basicSpecs?.length" (click)="spanBasicSpec()"
+                                                style="margin-left: 1%;" class="p-button-info col-md-1" pTooltip="Add"
+                                                icon="pi pi-plus" pButton pRipple type="button">
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12 d-flex justify-content-center">
+                                <button (click)="prevTab()" class="p-button-info mr-3" pTooltip="previous"
+                                    icon="pi pi-arrow-left" pButton pRipple type="button">
+                                </button>
+                                <button (click)="nextTab()" class="p-button-info" icon="pi pi-arrow-right"
+                                    pTooltip="next" pButton pRipple type="button">
+                                </button>
+                            </div>
+                        </form>
+                    </p-tabPanel>
+
+                    <!-- <p-tabPanel header="Credential">
+                        <div class="col-md-6 pt-4" style="color: #1A3C40; font-weight: bolder; font-size: 16px;">
+                            {{'Credential'}}
+                            <span style="margin-left: 3%;">
+                                <button (click)="spanCredentials()" class="p-button-info" icon="pi pi-plus" pButton
+                                    pRipple>
+                                </button>
+                            </span>
+                        </div>
+                        <br />
+                        <div *ngFor="let cd of credentials; let i=index">
+                            <div class="form-group col-md-12">
+
+                                <input class="inputfield w-full col-md-3" [(ngModel)]="cd.credentialType"
+                                    [ngModelOptions]="{standalone: true}" pInputText placeholder="Enter Credential Type"
+                                    type="text" style="margin-right: 1%;">
+                                <input class="inputfield w-full col-md-3" [(ngModel)]="cd.username"
+                                    [ngModelOptions]="{standalone: true}" pInputText placeholder="Enter Username"
+                                    type="text" style="margin-right: 1%;">
+                                <input class="inputfield w-full col-md-3" [(ngModel)]="cd.password"
+                                    [ngModelOptions]="{standalone: true}" pPassword placeholder="Enter Password"
+                                    (paste)="(true)" (copy)="(true)" (cut)="(true)" [showPassword]="showPassword"
+                                    type="password" style="margin-right: 1%;">
+
+                                <button (click)="onShowPasswordClick()" class="p-button-info btn-cancel mr-3"
+                                    icon="{{!showPassword ? 'pi pi-eye' : 'pi pi-eye-slash'}}" pButton pRipple
+                                    type="button">
+                                </button>
+                                <button (click)="removeCredential(i)" class="p-button-info btn-cancel mr-3"
+                                    pTooltip="Delete" icon="pi pi-trash" pButton pRipple type="button">
+                                </button>
+                                <button *ngIf="i+1===credentials.length" (click)="spanCredentials()"
+                                    class="p-button-info" pTooltip="Add" icon="pi pi-plus" pButton pRipple
+                                    type="button">
+                                </button>
+
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12 d-flex justify-content-center">
+                            <button (click)="prevTab()" class="p-button-info mr-3" pTooltip="previous"
+                                icon="pi pi-arrow-left" pButton pRipple type="button">
+                            </button>
+                            <button (click)="nextTab()" class="p-button-info" icon="pi pi-arrow-right" pTooltip="next"
+                                pButton pRipple type="button">
+                            </button>
+                        </div>
+                    </p-tabPanel> -->
+
+
+
+                    <!-- by sz -->
+                    <p-tabPanel header="Asset Photo">
+                        <div class="col-md-6" style="color: #1A3C40; font-weight: 900; font-size: 15px; ">
+                            <!-- <button (click)="spanDocuments()" class="p-button-info" icon="pi pi-plus"
+            style="margin-left: 2%;" pButton pRipple>
+        </button> -->
+                            <br />
+                            <br />
+                        </div>
+                        <div class="search-result" *ngIf="documentsPicture && documentsPicture?.length>0">
+                            <p-table [value]="documentsPicture" styleClass="p-datatable-gridlines"
+                                styleClass="p-datatable-gridlines" templateRight>
+
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="text-center" [style]="{'width':'5%'}">SL</th>
+                                        <th [style]="{'width':'18%'}">Image for</th>
+                                        <th [style]="{'width':'29%'}">Image Names</th>
+                                        <th class="text-center" [style]="{'width':'8%'}">Action</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template let-doc pTemplate="body" let-i="rowIndex">
+                                    <tr>
+                                        <td class="text-truncate text-center" data-toggle="tooltip" title="{{i+1}}">
+                                            {{i+1}}</td>
+                                        <td class="text-truncate text-left" *ngIf="i==0" data-toggle="tooltip"
+                                            title="{{i+1}}">
+                                            Front-side image of asset
+                                        </td>
+                                        <td class="text-truncate text-left" *ngIf="i==1" data-toggle="tooltip"
+                                            title="{{i+1}}">
+                                            Back-side image of asset
+                                        </td>
+                                        <td style="vertical-align: center; padding-bottom:1%">
+                                            <span *ngFor="let file of doc?.fileNames, let j=index">
+                                                <br />
+                                                <a (click)="downloadSelectedFilePicture(file)"
+                                                    style="cursor: pointer; font-weight: bolder;">
+                                                    {{file}}
+                                                </a>
+                                                <br />
+                                            </span>
+                                            <br />
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <button (click)="removeDocumentsPicture(i)"
+                                                class="p-button-info btn-cancel mr-3" pTooltip="Delete"
+                                                icon="pi pi-trash" pButton pRipple type="button">
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template let-columns pTemplate="emptymessage">
+                                    <tr>
+                                        <td [attr.colspan]="6" style="text-align: center;">
+                                            {{ 'No records found' }}
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+
+                        </div>
+                        <br />
+                        <p-card>
+                            <form [formGroup]="assetPictureDocumentsForm" novalidate>
+                                <table styleClass="p-datatable-gridlines" styleClass="p-datatable-gridlines"
+                                    templateRight>
+                                    <tr>
+                                        <td style="width: 20%;">
+
+                                            Please select and upload two images for front-side and back-side of the
+                                            asset.
+                                        </td>
+                                        <td style="width: 25%; ">
+
+                                            <span *ngFor="let tmpFile of tempFilesPicture; let i=index">
+                                                <a (click)="downloadSelectedFilePicture(tmpFile)"
+                                                    style="font-weight: bolder;">
+                                                    {{tmpFile}}</a><br />
+                                            </span>
+                                            <br />
+                                            <input (change)="onPictureFileSelected($event.target)"
+                                                id="orderDocumentPath" type="file"
+                                                accept="image/jpeg, image/JPEG, image/jpg, image/JPG, image/png, image/PNG">
+                                        </td>
+                                        <td style="width: 10%;">
+                                            <button class="p-button-rounded btn-success mr-3" pTooltip="Upload"
+                                                (click)="uploadToPictureDocuments()" label="{{'Upload'}}"
+                                                icon="pi pi-cloud-upload" pButton pRipple type="button">
+                                            </button>
+                                            <br /> <br />
+                                            <button class="p-button-rounded btn-info mr-3" pTooltip="Clean"
+                                                label="{{'Clean'}}" icon="pi pi-ban" pButton pRipple
+                                                (click)="cleanAssetPictureDocumentsForm()" type="button">
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </p-card>
+
+                        <br />
+                        <br />
+                        <div class="form-group col-md-12 d-flex justify-content-center">
+                            <button (click)="prevTab()" class="p-button-info mr-3" pTooltip="previous"
+                                icon="pi pi-arrow-left" pButton pRipple type="button">
+                            </button>
+                            <button (click)="nextTab()" class="p-button-info" icon="pi pi-arrow-right" pTooltip="next"
+                                pButton pRipple type="button">
+                            </button>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Asset Document">
+                        <div class="col-md-6" style="color: #1A3C40; font-weight: 900; font-size: 15px; ">
+                            <!-- <button (click)="spanDocuments()" class="p-button-info" icon="pi pi-plus"
+                                style="margin-left: 2%;" pButton pRipple>
+                            </button> -->
+                            <br />
+                            <br />
+                        </div>
+                        <div class="search-result" *ngIf="documents && documents?.length>0">
+                            <p-table [value]="documents" styleClass="p-datatable-gridlines"
+                                styleClass="p-datatable-gridlines" templateRight>
+
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="text-center" [style]="{'width':'5%'}">SL</th>
+                                        <th [style]="{'width':'18%'}">Document Name</th>
+                                        <th [style]="{'width':'32%'}">Doc Ref No.</th>
+                                        <th [style]="{'width':'10%'}">Date</th>
+                                        <th [style]="{'width':'29%'}">File Names</th>
+                                        <th class="text-center" [style]="{'width':'8%'}">Action</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template let-doc pTemplate="body" let-i="rowIndex">
+                                    <tr>
+                                        <td class="text-truncate text-center" data-toggle="tooltip" title="{{i+1}}">
+                                            {{i+1}}</td>
+
+                                        <td>{{doc.documentName}}</td>
+                                        <td>
+                                            {{doc.docRefNo}}
+                                        </td>
+                                        <td>
+                                            {{doc.docDate | date: 'dd / MM / yyyy'}}
+                                        </td>
+                                        <td style="vertical-align: center; padding-bottom:1%">
+                                            <span *ngFor="let file of doc?.fileNames, let j=index">
+                                                <br />
+                                                <a (click)="downloadSelectedFile(file)"
+                                                    style="cursor: pointer; font-weight: bolder;">
+                                                    {{file}}
+                                                </a>
+                                                <br />
+                                            </span>
+                                            <br />
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <button (click)="removeDocuments(i)" class="p-button-info btn-cancel mr-3"
+                                                pTooltip="Delete" icon="pi pi-trash" pButton pRipple type="button">
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template let-columns pTemplate="emptymessage">
+                                    <tr>
+                                        <td [attr.colspan]="6" style="text-align: center;">
+                                            {{ 'No records found' }}
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+
+                        </div>
+                        <br />
+                        <p-card>
+                            <form [formGroup]="assetDocumentsForm" novalidate>
+                                <table styleClass="p-datatable-gridlines" styleClass="p-datatable-gridlines"
+                                    templateRight>
+                                    <tr>
+                                        <td style="width: 20%;">
+
+                                            <label class="required" for="documentName">Document Name</label>
+                                            <input class="inputfield w-full" formControlName="documentName"
+                                                id="assetName" pInputText placeholder="{{'Document Name' }}"
+                                                type="text">
+                                            <span
+                                                *ngIf="assetDocumentsForm?.controls?.documentName?.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                                class="text-danger" style="font-size: 12px">
+                                                Document Name is mandatory.
+                                            </span>
+
+                                        </td>
+                                        <td style="width: 25%;">
+
+                                            <label class="required" for="docRefNo">Doc. Ref. No.</label>
+                                            <input class="inputfield w-full" formControlName="docRefNo" id="assetName"
+                                                pInputText placeholder="{{'Doc. Ref. No.' }}" type="text">
+                                            <span *ngIf="assetDocumentsForm?.controls?.docRefNo?.errors?.required"
+                                                class="text-danger" style="font-size: 12px">
+                                                Doc. Ref. No. is mandatory.
+                                            </span>
+
+                                        </td>
+                                        <td style="width: 20%;">
+
+                                            <label class="required" for="docRefNo">Doc Date</label>
+                                            <p-calendar [maxDate]="maxDate" [minDate]="minDate" [monthNavigator]="true"
+                                                formControlName="docDate" [showIcon]="true" [yearNavigator]="true"
+                                                dateFormat="dd/mm/yy" id="docDate" placeholder="{{'Doc Date' }}"
+                                                [yearRange]="minDateYear+':'+maxDateYear"></p-calendar>
+                                            <span
+                                                *ngIf="assetDocumentsForm?.controls?.docDate?.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                                class="text-danger" style="font-size: 12px">
+                                                Doc Date is mandatory.
+                                            </span>
+
+
+                                        </td>
+                                        <td style="width: 25%; ">
+
+                                            <span *ngFor="let tmpFile of tempFiles; let i=index">
+                                                <a (click)="downloadSelectedFile(tmpFile)" style="font-weight: bolder;">
+                                                    {{tmpFile}}</a><br />
+                                            </span>
+                                            <br />
+                                            <input (change)="onFileSelected($event.target)" id="orderDocumentPath"
+                                                type="file" accept="application/pdf, application/PDF">
+                                        </td>
+                                        <td style="width: 10%;">
+                                            <button class="p-button-rounded btn-success mr-3" pTooltip="Upload"
+                                                (click)="uploadToDocuments()" label="{{'Upload'}}"
+                                                icon="pi pi-cloud-upload" pButton pRipple type="button">
+                                            </button>
+                                            <br /> <br />
+                                            <button class="p-button-rounded btn-info mr-3" pTooltip="Clean"
+                                                label="{{'Clean'}}" icon="pi pi-ban" pButton pRipple
+                                                (click)="cleanAssetDocumentsForm()" type="button">
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </p-card>
+                        <br />
+                        <br />
+                        <div class="form-group col-md-12 d-flex justify-content-center">
+                            <button (click)="prevTab()" class="p-button-info mr-3" pTooltip="previous"
+                                icon="pi pi-arrow-left" pButton pRipple type="button">
+                            </button>
+                            <button (click)="nextTab()" class="p-button-info" icon="pi pi-arrow-right" pTooltip="next"
+                                pButton pRipple type="button">
+                            </button>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Status">
+                        <form [formGroup]="assetStatusForm" novalidate>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="required" for="assetStatus">Asset Status</label>
+                                        <p-dropdown [options]="assetStatuses" [showClear]="true" [filter]="true"
+                                            formControlName="assetStatus" id="assetStatus" optionLabel="label"
+                                            optionValue="value" placeholder="Select Asset Status" [filter]="true">
+                                        </p-dropdown>
+                                        <span
+                                            *ngIf="assetStatusForm?.controls?.assetStatus.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                            class="text-danger" style="font-size: 12px">
+                                            Asset Status is mandatory.
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="required" for="assetCondition">Asset Condition</label>
+                                        <p-dropdown [options]="assetCondtions" [showClear]="true"
+                                            formControlName="assetCondition" id="assetCondition" optionLabel="label"
+                                            optionValue="value" placeholder="Select Asset Condition" [filter]="true">
+                                        </p-dropdown>
+                                        <span
+                                            *ngIf="assetStatusForm?.controls?.assetCondition.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                            class="text-danger" style="font-size: 12px">
+                                            Asset Condition is mandatory.
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="form-group" style="margin-left: 2%;">
+                                        <label class="" for="assetRemarks">Asset Remarks</label>
+                                        <textarea class="inputfield w-full" formControlName="assetRemarks" rows="5"
+                                            id="assetRemarks" pInputText placeholder="{{'Asset Remarks' }}"
+                                            type="text"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-12 d-flex justify-content-center">
+                                    <button (click)="prevTab()" class="p-button-info mr-3" pTooltip="previous"
+                                        icon="pi pi-arrow-left" pButton pRipple type="button">
+                                    </button>
+                                    <button (click)="nextTab()" class="p-button-info" icon="pi pi-arrow-right"
+                                        pTooltip="next" pButton pRipple type="button">
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </p-tabPanel>
+                    <p-tabPanel header="Service" *ngIf="desktopLaptopExist">
+                        <form [formGroup]="assetServiceForm" novalidate>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label class="required" for="AssetOwnerName">Responsible Person(s)</label>
+                                        <input class="inputfield w-full" formControlName="AssetOwnerName"
+                                            id="AssetOwnerName" pInputText placeholder="{{'Responsible Person'}}"
+                                            type="text">
+                                        <!-- 
+                                        <p-dropdown [options]="reponsiblePersonList" [showClear]="true"
+                                            formControlName="assetOwnerOid" id="assetOwnerOid"
+                                            optionLabel="assetOwnerName" optionValue="assetOwnerOid"
+                                            placeholder="Select Person Name" [filter]="true">
+                                        </p-dropdown> -->
+
+                                        <!-- <span *ngIf="assetServiceForm?.controls?.assetOwnerOid?.errors?.required"
+                                            class="text-danger" style="font-size: 12px">
+                                            Responsible Person is mandatory.
+                                        </span> -->
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label class="required" for="assetOwnerDesignation">Designation</label>
+                                        <input class="inputfield w-full" formControlName="assetOwnerDesignation"
+                                            id="assetOwnerDesignation" pInputText placeholder="{{'Designation' }}"
+                                            type="text">
+                                        <span
+                                            *ngIf="assetServiceForm?.controls?.assetOwnerDesignation?.errors?.required&& assetGeneralForm?.controls?.assetName?.touched"
+                                            class="text-danger" style="font-size: 12px">
+                                            Designation is mandatory.
+                                        </span>
+                                    </div> -->
+                                    <div class="form-group">
+                                        <div class="modalClass" style="display: flex; gap:20px; margin-bottom: 20px;">
+                                            <label class="required" for="assetCategoryTypeOid">Designation</label>
+                                            <div style="text-align: left">
+                                                <p-dialog
+                                                header="Add Designation"
+                                                [(visible)]="BasicShow"
+                                                [style]="{width: '30vw'}"
+                                                [draggable]="false"
+                                                [resizable]="false"
+                                                [contentStyle]="{ 'overflow-y': 'hidden','overflow-x': 'hidden'}"
+                                                class="reply-modal">
+                                                    <div class="row row-centered">
+                                                        <form novalidate>
+                                                            <input type="text" class="form-control modal-input" [(ngModel)]="designationFromModal" name="designationFromModal" size="70"/>
+                                                            
+                                                        </form>
+                                                    </div>
+                                                    <ng-template pTemplate="footer">
+                                                        <p-button
+                                                            (click)="BasicShow = false"
+                                                            label="Cancel"
+                                                            styleClass="btn btn-lg btn-cancel reply-btn">
+                                                        </p-button>
+                                                        <p-button
+                                                            (click)="saveDesignation()"
+                                                            label="Accept"
+                                                            styleClass="btn btn-lg btn-success reply-btn">
+                                                        </p-button>
+                                                    </ng-template>
+                                                </p-dialog>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="row row-modal">
+                                            <div class="col-11">
+                                                    <p-dropdown [options]="designations" [showClear]="true" 
+                                                    id="oid" optionLabel="designationName" formControlName="assetOwnerDesignation" optionValue="oid"
+                                                    placeholder="Select Designation"
+                                                    [filter]="true">
+                                                </p-dropdown>
+                                                <span *ngIf="assetGeneralForm?.controls?.oid?.errors?.required"
+                                                    class="text-danger" style="font-size: 12px;">
+                                                    Designation is mandatory..
+                                                </span>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <p-button
+                                                class="custom-plus-design"
+                                                (click)="showDialog()"
+                                                icon="pi pi-plus"> 
+                                                </p-button>
+                                            </div>
+                                        </div>
+                                            
+                                                
+                                           
+                                       
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Address / Section / Unit</label>
+                                        <input class="inputfield w-full" formControlName="assetOwnerUnit"
+                                            id="assetOwnerUnit" pInputText placeholder="{{'Address / Section / Unit' }}"
+                                            type="text">
+
+                                        <!-- <p-dropdown [options]="assetUnits" [showClear]="true" formControlName="assetOwnerUnit"
+                                            optionLabel="label" optionValue="value" [filter]="true">
+                                        </p-dropdown>  -->
+
+                                        <span *ngIf="assetServiceForm?.controls?.assetOwnerUnit?.errors?.required==true"
+                                            class="text-danger" style="font-size: 12px">
+                                            Address / Section / Unit is mandatory.
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-5" style="margin-top: 2%; margin-left: 2%;">
+                                    <div class="row" *ngFor="let asj of additionalServiceJson; let i=index;">
+                                        <div class="p-field-checkbox col-md-1">
+                                            <div class="form-group">
+                                                <p-checkbox [(ngModel)]="asj.boolValue" binary="true"
+                                                    [ngModelOptions]="{standalone: true}" inputId="binary"></p-checkbox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" style="font-weight: bolder; margin-left: -3%;">
+                                            <div class="form-group">
+                                                {{asj?.label}} </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group" *ngIf="asj?.label=='IP Address' && asj?.boolValue">
+                                                <input class="inputfield w-full" [(ngModel)]="asj.textValue1"
+                                                    [ngModelOptions]="{standalone: true}" pInputText pattern="[0-9]"
+                                                    placeholder="{{asj?.label}}" type="text" style="margin-right: 1%;">
+                                                <div class=" text-danger"
+                                                    *ngIf="asj?.boolValue &&  asj?.textValue1?.length<1"
+                                                    style="position: relative; margin-left: 5%;">
+                                                    IP Address is mandatory.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 d-flex justify-content-center">
+                                    <button (click)="prevTab()" class="p-button-info mr-3" pTooltip="previous"
+                                        icon="pi pi-arrow-left" pButton pRipple type="button">
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </p-tabPanel>
+                </p-tabView>
+            </div>
+            <div class="form-group col-md-12 d-flex justify-content-center pt-4">
+                <button (click)="onCancel()" class=" p-button-rounded btn-cancel mr-3" icon="pi pi-times"
+                    label="{{'Cancel'}}" pButton pRipple type="button">
+                </button>
+                <button (click)="onSubmit()" class=" p-button-rounded button-info" icon="pi pi-check"
+                    label="{{mode==='UPDATE'?'Update':'Save'}}" pButton pRipple type="button">
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <p-toast position="top-right" [style]="{marginTop: '80px'}"></p-toast>
+    <p-confirmDialog></p-confirmDialog>
+</div>

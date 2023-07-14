@@ -1,0 +1,79 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+
+<div class="container-fluid" style="margin-top: 2%;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 100px;">
+                    <p-breadcrumb [model]="items"></p-breadcrumb>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+            </div>
+            <div class="search-criteria d-flex">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8 pl-0">
+                            <button (click)="createDesignation()" class="p-button-rounded btn-success mr-3" icon="pi pi-plus" label="{{'New Designation'}}"
+                                pButton pRipple>
+                            </button>
+                        </div>
+                        <div class="col-md-4 pr-0">
+                            <input #sessionSearchPopRef [(ngModel)]="defaultSearchText" [disabled]="trDisabled"
+                                autocomplete="off"
+                                class="form-control ib-input branch-search form-control form-input search-input  search-border"
+                                id="sessionSearchPop" name="sessionSearchPop" placeholder="{{'Search...'}}"
+                                tabindex="11" type="text" />
+                        </div> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-result">
+                <p-table #sessionTableRef (onLazyLoad)="onSessionLazyLoad($event)" [lazy]="true" [paginator]="true"
+                    [resizableColumns]="true" [responsive]="true" [rowsPerPageOptions]="rowsPerPageOptions"
+                    [rows]="rows" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [value]="sessionList"
+                    columnResizeMode="expand" currentPageReportTemplate="{last} of {totalRecords}"
+                    responsiveLayout="scroll" styleClass="p-datatable-gridlines" styleClass="p-datatable-gridlines"
+                    templateRight>
+
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="text-center" [style]="{'width':'5%'}">Sl</th>
+                            <th class="text-center" [style]="{'width':'15%'}">Designation</th>
+                            <th class="text-center" [style]="{'width':'10%'}">Action</th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template let-session pTemplate="body" let-i="rowIndex">
+                        <tr>
+                            <td class="text-truncate text-center" data-toggle="tooltip" title="{{i+1}}">{{i+1}}</td>
+                                <td class="text-truncate" data-toggle="tooltip" title="{{session?.designationName}}">
+                                    {{session?.designationName}}</td>
+                            <td class="text-center">
+                                <button class="p-button-rounded p-button-text" icon="pi pi-pencil" pButton
+                                    pTooltip="Update or Edit" style="color: white; background-color: #52854D"
+                                    type="button" (click)="updateDesignation(session?.oid)">
+                                </button>
+                                <!-- <button class="p-button-rounded p-button-text" icon="pi pi-trash" pButton pRipple
+                                    pTooltip="Delete or Remove" style="color: white; background-color: #52854D"
+                                    type="button" (click)="deleteDesignationById(session?.oid)"></button>  -->
+
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template let-columns pTemplate="emptymessage">
+                        <tr>
+                            <td [attr.colspan]="9" style="text-align: center;">
+                                {{ 'No records found' }}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast position="top-right" [style]="{marginTop: '80px'}"></p-toast>
+<p-confirmDialog></p-confirmDialog>

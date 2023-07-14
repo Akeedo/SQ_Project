@@ -1,0 +1,42 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row pb-4">
+                <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 100px;">
+                    <p-breadcrumb [model]="items"></p-breadcrumb>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between"></div>
+            <div class="card p-3">
+                    <div class="row">
+
+                        <div class="col-md-2">
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <p-dropdown [options]="vendorList" [showClear]="true"
+                                [(ngModel)]="vendorOid" id="vendorOid"
+                                    optionLabel="vendorName" optionValue="vendorOid"
+                                    placeholder="Select Vendor" [filter]="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="p-button-rounded btn-success mr-3" (click)="downloadAssetListByVendor()" icon="pi pi-file-o" label="{{'Generate'}}"
+                                pButton type="button"style="color:white !important; font-family: kite-display !important; font-size:larger; margin-top:25px">
+                            </button>
+                            <button (click)="goBack()" class="p-button-rounded btn-cancel mr-3" icon="pi pi-times"
+                                label="{{'Cancel'}}" pButton type="button"style="color:white !important; font-family: kite-display !important; font-size:larger; margin-top:25px">
+                            </button>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast position="top-right"></p-toast>

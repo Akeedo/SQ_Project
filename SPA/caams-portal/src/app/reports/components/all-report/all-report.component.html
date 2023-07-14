@@ -1,0 +1,62 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row pb-4">
+                <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 100px;">
+                    <p-breadcrumb [model]="items"></p-breadcrumb>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p-card header="Asset Report">
+                        <p-table [value]="assetReportList" responsiveLayout="scroll">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th [style]="{'width':'5%','font-size':'18px'}">Report Id</th>
+                                    <th [style]="{'width':'5%','font-size':'18px'}" >Report Title</th>
+                                    <th  [style]="{'width':'5%','font-size':'18px'}" style="padding-left: 25%;">Action</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-report>
+                                <tr>
+                                    <td>{{report.id}}</td>
+                                    <td>{{report.title}}</td>
+                                    <td style="padding-left: 25%;">                                        
+                                        <i class="pi pi-eye" (click)="goToReportPage(report.id)" pTooltip="View Reports" style="font-size: 1.5rem; color:#0965c9; cursor: pointer;"></i>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </p-card>
+                </div>
+                <div class="col-md-6">
+                    <p-card header="Date-wise Report">
+                        <p-table [value]="dateWiseReportList" responsiveLayout="scroll">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th [style]="{'width':'5%','font-size':'18px'}">Report Id</th>
+                                    <th [style]="{'width':'5%','font-size':'18px'}">Report Title</th>
+                                    <th [style]="{'width':'5%','font-size':'18px'}" style="padding-left: 25%;">Action</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-report>
+                                <tr>
+                                    <td>{{report.id}}</td>
+                                    <td>{{report.title}}</td>
+                                    <td style="padding-left: 25%;">                                        
+                                        <i class="pi pi-eye" (click)="goToReportPage(report.id)" pTooltip="View Reports" style="font-size: 1.5rem; color:#0965c9; cursor: pointer;"></i>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </p-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast position="top-right"></p-toast>

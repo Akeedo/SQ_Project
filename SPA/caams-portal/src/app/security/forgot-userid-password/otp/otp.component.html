@@ -1,0 +1,79 @@
+<div class="container container-otp">
+  <div class="row h-100 justify-content-center align-items-center" style="padding-top: 25%;">
+    <div class="col-sm-5 col-md-5 col-lg-5 my-auto">
+      <loading-image [is-loading]="isLoading"></loading-image>
+      <div *ngIf="!isOTPVerificationSuccess">
+        <div class="text-center">
+          <div class="sign-in-up">
+            <div class="otp-area">
+              <h4 class="pb-20">{{'OTP Verification'}}</h4>
+              <div class="form-group mb-4">
+                <label class="form-label" for="otpInput">{{'Enter OTP'}}</label>
+                <input type="text" class="form-control form-input spacing-input" minlength="6" maxlength="6" tabindex="1"
+                       id="otpInput"
+                       name="otpInput"
+                       #otpModelRef="ngModel"
+                       [pKeyFilter]="onlyNumber"
+                       [(ngModel)]="otpInput"
+                       placeholder="{{'Enter your 6 digit OTP'}}"
+                       iAutofocus
+                       required />
+              </div>
+              <div>
+                <div class="d-flex align-items-center">
+                  <div class="mr-auto">
+                    <circle-progress #circleProgres
+                                     [percent]="100"
+                                     [radius]="30"
+                                     [outerStrokeWidth]="2"
+                                     [space]="-2"
+                                     [innerStrokeWidth]="2"
+                                     [outerStrokeColor]="'#498E4D'"
+                                     [innerStrokeColor]="'#e7e8ea'"
+                                     [clockwise]="false"
+                                     [title]=""
+                                     [titleFormat]="formatTitle"
+                                     [titleColor]="'#498E4D'"
+                                     [titleFontSize]="16"
+                                     [titleFontWeight]="500"
+                                     [subtitle]="'Sec'"
+                                     [subtitleColor]="'#498E4D'"
+                                     [subtitleFontSize]="11"
+                                     [subtitleFontWeight]="300"
+                                     [showUnits]="false"
+                                     [renderOnClick]="false"
+                                     [secondToCircleProgres]="secondToCircleProgres">
+                    </circle-progress>
+                  </div>
+                  <div class="">
+                    <ul class="list-inline">
+                      <li class="list-inline-item"><button (click)="onCancelClick()" style="color: green;" class="btn btn-link" tabindex="4">{{'CANCEL'}}</button></li>
+                      <li class="list-inline-item" *ngIf="timeLeft == 0">
+                        <button class="form-control btn btn-link" style="color: green;" (click)="onResendOTPClick()" tabindex="3" [disabled]="isLoading || timeLeft > 0">
+                          {{'RESEND'}}
+                        </button>
+                      </li>
+                      <li class="list-inline-item" *ngIf="timeLeft > 0">
+                        <button class="form-control btn btn-success"
+                                tabindex="2" [disabled]="isLoading || otpModelRef.invalid" (click)="onVerifyClick()">
+                          {{'CONFIRM'}}
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
+<p-toast></p-toast>

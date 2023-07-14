@@ -1,0 +1,76 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+
+<div *ngIf="disableHeader" class="header-div"></div>
+<div class="all-content-wrapper">
+  <div class="container-fluid no-printme">
+    <div class="row">
+      <div class="col-md-12" style="padding-bottom: 20px">
+        <div class="header-top-area d-flex justify-content-between align-items-center">
+          <div class="top-menu-left d-flex justify-content-start" style="padding-bottom: 10px;">
+            <!-- sidebar collapse and extend -->
+            <span style="margin-top: 15px;" class="menu-switcher-pro" id="sidebarCollapse">
+              <i class="pi pi-pw pi-bars bar-button-pro" style="color: white">&nbsp;</i>
+            </span>
+            <h3 class="text-center" style="font-size: 32px; padding-left: 300px; font-weight: bolder;font-family: kite-display;">Customs Automation Asset Management System</h3>
+            <!-- <h6 style="padding-left: 150px;">logged in org {{this.userId}}</h6> -->
+            <span class="welcome-user-info">
+              <h1 style="
+                  font-family: kite-display;
+                  font-weight: 100;
+                  font-size: 2rem;
+                  margin-top: 8px;
+                ">
+              </h1>
+            </span>
+          </div>
+          <div class="header-top-menu">
+            <div class="top-menu-right">
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <span class="d-flex flex-column">
+                    <span style="
+                        font-size: 16px;
+                        text-align: left;
+                        font-weight: 600;
+                      ">{{ userName }}</span>
+                  </span>
+                </li>
+                <li class="list-inline-item dropdown">
+                  <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href=""
+                    id="dropdownMenuButton">
+                    <img [src]="downloadedFilePath1" alt="" class="rounded-circle" height="32" width="32" />
+                  </a>
+                  <div class="dropdown-menu megamenu bg-light" style="
+                        width: 280px;
+                        height: 230px;
+                        padding: 15px;
+                        margin-top: 8px;
+                        bottom: 0px;
+                        ">
+                    <div class="text-center" style="height: 90px">
+                      <img [src]="downloadedFilePath1" alt="" class="rounded-circle" height="64" width="32" />
+                      <h5>{{ userName }}</h5>
+                    </div>
+                <li style="margin-bottom: 5px; margin-top: 5px">
+                  <button [routerLink]="['/my-profile']" class="p-button-outlined p-button-info btn-block"
+                    icon="pi pi-user" id="myProfile" label="{{ 'My Profile' }}" pButton pRipple type="button"></button>
+                </li>
+                <li style="margin-bottom: 5px">
+                  <button [routerLink]="['/change-password']" class="p-button-outlined p-button-info btn-block"
+                    icon="pi pi-key" id="changePassword" label="{{ 'ChangePassword' }}" pButton pRipple
+                    type="button"></button>
+                </li>
+                <li style="margin-bottom: 5px">
+                  <button (click)="onLogoutClick()" class="p-button-outlined p-button-info btn-block"
+                    icon="pi pi-sign-out" id="logOut" label="{{ 'Logout' }}" pButton pRipple type="button"></button>
+                </li>
+            </div>
+            </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

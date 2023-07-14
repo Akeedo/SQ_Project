@@ -1,0 +1,93 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row pb-4">
+                <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 100px;">
+                    <p-breadcrumb [model]="items"></p-breadcrumb>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between"></div>
+            <div class="card p-3">
+                <form [formGroup]="licenseGroup" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="required" for="licenseName">License Name</label>
+                                <input class="inputfield w-full" formControlName="licenseName" id="licenseName" pInputText placeholder="{{'License Name'}}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="licenseSerial">Serial</label>
+                                <input class="inputfield w-full" formControlName="licenseSerial" id="licenseSerial" pInputText placeholder="{{'License Serial'}}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="licensePurchasedSeats">Number of Seats</label>
+                                <input class="inputfield w-full" formControlName="licensePurchasedSeats" id="licensePurchasedSeats" pInputText placeholder="{{'Number of Seats'}}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="assetCategoryOid">Category</label>
+                                <p-dropdown [options]="assetCategoryNameList" [showClear]="true" formControlName="assetCategoryOid" id="assetCategoryOid"
+                                    optionLabel="assetCategoryName" optionValue="assetCategoryOid" placeholder="Asset Category Name">
+                                </p-dropdown>
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="manufacturerOid">Manufacturer</label>
+                                <p-dropdown [options]="manufacturerNameList" [showClear]="true" formControlName="manufacturerOid" id="manufacturerOid"
+                                    optionLabel="manufacturerName" optionValue="manufacturerOid" placeholder="Manufacturer Name">
+                                </p-dropdown>
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="vendorOid">Vendor</label>
+                                <p-dropdown [options]="vendorNameList" [showClear]="true" formControlName="vendorOid" id="vendorOid"
+                                    optionLabel="vendorName" optionValue="vendorOid" placeholder="Vendor Name">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="required" for="licensePurchaseDate">Purchase Date</label>
+                                <!-- <input class="inputfield w-full" formControlName="licensePurchaseDate" id="licensePurchaseDate" pInputText placeholder="{{'licensePurchaseDate'}}" type="text"> -->
+                                <p-calendar [maxDate]="maxDate" [minDate]="minDate" [monthNavigator]="true"
+                                [showIcon]="true" [yearNavigator]="true" dateFormat="dd/mm/yy"
+                                formControlName="licensePurchaseDate" id="licensePurchaseDate"
+                                placeholder="{{'Purchase Date' }}" yearRange="1900:2023"></p-calendar>
+                            </div>
+                            <div class="form-group">
+                                <label for="licensePurchaseNumber">Purchase No</label>
+                                <input class="inputfield w-full" formControlName="licensePurchaseNumber" id="licensePurchaseNumber" pInputText placeholder="{{'Purchase No' }}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="licenseAvailableSeats">License Available Seats</label>
+                                <input class="inputfield w-full" formControlName="licenseAvailableSeats" id="licenseAvailableSeats" pInputText placeholder="{{'License Available Seats' }}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="licensePurchaseCost">Purchase Cost</label>
+                                <input class="inputfield w-full" formControlName="licensePurchaseCost" id="licensePurchaseCost" pInputText placeholder="{{'Purchase Cost' }}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="licenseContact">Contact</label>
+                                <input class="inputfield w-full" formControlName="licenseContact" id="licenseContact" pInputText placeholder="{{'Contact' }}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="licenseRemarks">Remarks</label>
+                                <input class="inputfield w-full" formControlName="licenseRemarks" id="licenseRemarks" pInputText placeholder="{{'Remarks'}}" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-center">
+                        <button (click)="onCancel()" class="p-button-info btn-cancel mr-3" icon="pi pi-times" label="{{'Cancel'}}" pButton
+                            pRipple type="button">
+                        </button>
+                        <button (click)="onSubmit()" class="p-button-info" icon="pi pi-check" label="{{'Submit'}}" pButton pRipple
+                            type="button">
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast position="top-right"></p-toast>

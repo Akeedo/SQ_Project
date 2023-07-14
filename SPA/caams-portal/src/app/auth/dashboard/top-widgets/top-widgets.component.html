@@ -1,0 +1,83 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="card-deck">
+
+    <div class="card text-white bg-info shadow-sm d-flex justify-content-around rounded mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <h3 class="fs-2"
+              style="font-family: kite-display; font-weight: bolder; text-align: center; margin-left: -10px;">
+              {{totalAssetData }}</h3>
+            <p class="fs-5" style="font-family: kite-display; margin-left: 50px;">Total Asset </p>
+          </div>
+          <div class="icon-col">
+            <i [class]="'pi pi-briefcase'" style="font-size: 6rem"></i>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-center">
+        <a (click)="onClickAssetMoreInfo()" style="color: white; font-family: kite-display; cursor:pointer ">More
+          Info</a>
+      </div>
+    </div>
+
+    <div class="card text-white bg-danger mb-3" style="font-family: kite-display;">
+      <div class="card-body">
+        <div class="row">
+          <div class="col" style="font-family: kite-display;">
+            <h3 class="fs-2" style="font-family: kite-display; font-weight: bolder; text-align: center;">
+              {{pendingIssueCount}}</h3>
+            <p class="fs-5">Pending Issues</p>
+          </div>
+          <div class="icon-col">
+            <i [class]="'pi pi-clone'" style="font-size: 6rem"></i>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-center  ">
+        <a (click)="onClickMoreInfoOnStatusType('Pending')" style="color: white; font-family: kite-display; cursor:pointer ">More
+          Info</a>
+      </div>
+    </div>
+
+    <div class="card text-white bg-warning mb-3" style="font-family: kite-display;">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <h2 class="fs-2" style="font-family: kite-display; font-weight: bolder; text-align: center;">
+              {{ongoingIssueCount}}</h2>
+            <p class="fs-5">Ongoing Issues</p>
+          </div>
+          <div class="icon-col">
+            <i [class]="'pi pi-pencil'" style="font-size: 6rem"></i>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-center">
+        <a (click)="onClickMoreInfoOnStatusType('Ongoing')" style="color: white; font-family: kite-display; cursor:pointer ">More
+          Info</a>
+      </div>
+    </div>
+
+
+    <div class="card text-white bg-success mb-3" style="font-family: kite-display;">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <h3 class="fs-2" style="font-family: kite-display; font-weight: bolder; text-align: center;">
+              {{relosvedIssueCount}}</h3>
+            <p class="fs-5">Resolved Issues</p>
+          </div>
+          <div class="icon-col">
+            <i [class]="'pi pi-check-circle'" style="font-size: 6rem"></i>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-center">
+        <a (click)="onClickMoreInfoOnStatusType('Resolved')" style="color: white; font-family: kite-display; cursor:pointer ">More
+          Info</a>
+      </div>
+    </div>
+
+  </div>
+</div>

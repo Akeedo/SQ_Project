@@ -1,0 +1,73 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 100px;">
+                    <p-breadcrumb [model]="items"></p-breadcrumb>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+            </div>
+            <div class="card p-3">
+                <form [formGroup]="responsiblepersonGroup" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="required" for="assetOwnerName">Responsible Person's Name</label>
+                                <input class="inputfield w-full" formControlName="assetOwnerName" id="assetOwnerName"
+                                    pInputText placeholder="{{ 'Select Responsible Person's Name' }}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="assetOwnerMobileNumber">Mobile Number</label>
+                                <input class="inputfield w-full" formControlName="assetOwnerMobileNumber"
+                                    id="assetOwnerMobileNumber" pInputText
+                                    placeholder="{{'Select Responsible Person MobileNumber' }}" type="text">
+                            </div>
+ 
+
+                            <div class="form-group">
+                                <label  for="assetOwnerUnit">Unit</label>
+                                <input class="inputfield w-full" formControlName="assetOwnerUnit" id="assetOwnerUnit"
+                                    pInputText placeholder="{{'Select Responsible Person Unit'}}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label  for="assetOwnerStatus">Asset Owner Status</label>
+                                <p-dropdown [options]="assetOwnerStatusList" [showClear]="true"
+                                    formControlName="assetOwnerStatus" id="assetOwnerStatus" optionLabel="name"
+                                    optionValue="oid" placeholder="assetOwner Status">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label  for="assetOwnerEmail">Email</label>
+                                <input class="inputfield w-full" formControlName="assetOwnerEmail" id="assetOwnerEmail"
+                                    pInputText placeholder="{{'Select Responsible Person Email' }}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="assetOwnerDesignation">Designation</label>
+                                <input class="inputfield w-full" formControlName="assetOwnerDesignation"
+                                    id="assetOwnerDesignation" pInputText placeholder="{{'Designation' }}" type="text">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group  d-flex justify-content-center">
+                        <button (click)="onCancel()" class="p-button-info btn-cancel mr-3" icon="pi pi-times"
+                            label="{{'Cancel'}}" pButton pRipple type="button">
+                        </button>
+                        <button (click)="onSubmit()" class="p-button-info" icon="pi pi-check" label="{{'Save'}}" pButton
+                            pRipple type="button">
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast position="top-right"></p-toast>

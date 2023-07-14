@@ -1,0 +1,11 @@
+[
+	{ "id": "001","title" : "By Category"},
+	{ "id": "002","title" : "By Manufacturer"},
+	{ "id": "003","title" : "By Site"},
+	{ "id": "004","title" : "By Vendor"},
+	{ "id": "005","title" : "By Product Serial"},
+	{ "id": "006","title" : "By Part Number"},
+	{ "id": "007","title" : "By Condition"},
+	{ "id": "008","title" : "By Responsible"},
+	{ "id": "009","title" : "By Asset History"}
+]
