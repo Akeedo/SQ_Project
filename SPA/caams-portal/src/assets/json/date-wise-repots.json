@@ -1,6 +1,0 @@
-[
-	{ "id": "001","title" : "By Purchase Date"},
-	{ "id": "002","title" : "By EOL Date"},
-    { "id": "003","title" : "By Warranty Start Date"},
-    { "id": "004","title" : "By Warranty End Date"}    
-]
