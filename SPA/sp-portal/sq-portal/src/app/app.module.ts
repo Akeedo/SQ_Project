@@ -9,6 +9,7 @@ import { HomeComponent } from './home/components/home/home.component';
 import { LoadingImageModule } from 'src/common/components/loading-image/loading-image.module';
 import { PrimengModule } from 'src/common/modules/primeng-modules'; 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { CreateEmployeeComponent } from './employee/components/create-employee/create-employee.component';
 
 export function createTranslateLoader(httpBackend: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(httpBackend), './assets/i18n/', '.json');
@@ -18,7 +19,8 @@ export function createTranslateLoader(httpBackend: HttpBackend) {
   declarations: [
     AppComponent,
     EmployeeListComponent,
-    HomeComponent
+    HomeComponent,
+    CreateEmployeeComponent
   ],
   imports: [
     BrowserModule,

@@ -17,9 +17,10 @@ namespace SQ_Project.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Employee>> GetEmployees()
+        public async Task<IActionResult> GetEmployees()
         {
-            return await _repository.GetEmployees();
+            var employees = await _repository.GetEmployees();
+            return Ok(employees);
         }
 
         [HttpGet("{id}")]

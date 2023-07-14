@@ -1,4 +1,4 @@
-<!-- <loading-image [is-loading]="isLoading"></loading-image> -->
+<loading-image [is-loading]="isLoading"></loading-image>
 
 <div class="container-fluid" style="margin-top: 2%;">
     <div class="row">
@@ -14,7 +14,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-8 pl-0">
-                            <button  class="p-button-rounded btn-success mr-3" icon="pi pi-plus" label="{{'New Designation'}}"
+                            <button (click)="createEmployee()" class="p-button-rounded btn-success mr-3" icon="pi pi-plus" label="{{'New Employee'}}"
                                 pButton pRipple>
                             </button>
                         </div>
@@ -30,17 +30,18 @@
             </div>
 
             <div class="search-result">
-                <p-table #sessionTableRef  [lazy]="true" [paginator]="true"
-                    [resizableColumns]="true" [responsive]="true"
-                    [rows]="" [showCurrentPageReport]="true" 
+                <p-table #sessionTableRef (onLazyLoad)="onSessionLazyLoad($event)" [lazy]="true" [paginator]="true"
+                    [resizableColumns]="true" [responsive]="true" [rowsPerPageOptions]="rowsPerPageOptions"
+                    [rows]="rows" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [value]="sessionList"
                     columnResizeMode="expand" currentPageReportTemplate="{last} of {totalRecords}"
                     responsiveLayout="scroll" styleClass="p-datatable-gridlines" styleClass="p-datatable-gridlines"
                     templateRight>
-
                     <ng-template pTemplate="header">
                         <tr>
                             <th class="text-center" [style]="{'width':'5%'}">Sl</th>
-                            <th class="text-center" [style]="{'width':'15%'}">Designation</th>
+                            <th class="text-center" [style]="{'width':'15%'}">EmpCode</th>
+                            <th class="text-center" [style]="{'width':'15%'}">Name</th>
+                            <th class="text-center" [style]="{'width':'15%'}">Phone Number</th>
                             <th class="text-center" [style]="{'width':'10%'}">Action</th>
                         </tr>
                     </ng-template>
@@ -48,8 +49,12 @@
                     <ng-template let-session pTemplate="body" let-i="rowIndex">
                         <tr>
                             <td class="text-truncate text-center" data-toggle="tooltip" title="{{i+1}}">{{i+1}}</td>
-                                <td class="text-truncate" data-toggle="tooltip" title="{{session?.designationName}}">
-                                    {{session?.designationName}}</td>
+                            <td class="text-truncate" data-toggle="tooltip" title="{{session?.empCode}}">
+                                {{session?.empCode}}</td>
+                            <td class="text-truncate" data-toggle="tooltip" title="{{session?.name}}">
+                                {{session?.name}}</td>
+                            <td class="text-truncate" data-toggle="tooltip" title="{{session?.phoneNumber}}">
+                                {{session?.phoneNumber}}</td>
                             <td class="text-center">
                                 <button class="p-button-rounded p-button-text" icon="pi pi-pencil" pButton
                                     pTooltip="Update or Edit" style="color: white; background-color: #52854D"

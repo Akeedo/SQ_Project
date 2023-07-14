@@ -36,7 +36,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("MyPolicy",
         builder =>
         {
-            builder.WithOrigins("https://localhost:7186/swagger/") // replace with your client's URL
+            builder.WithOrigins("https://localhost:7186/swagger/", "http://localhost:4200") // replace with your client's URL
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });

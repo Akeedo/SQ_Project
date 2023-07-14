@@ -46,6 +46,16 @@ export class EmployeeListComponent implements OnInit{
     }
 
   ngOnInit(): void {
+    
+  }
+
+  createEmployee() {
+    this.router.navigate(["create-employee"], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        mode: 'CREATE'
+      }
+    });
   }
 
   onSessionLazyLoad($event) {
@@ -57,12 +67,9 @@ export class EmployeeListComponent implements OnInit{
   }
 
   private getPagedEmployees() {
-    this.employeeService.getPagedEmployees().subscribe(res => {
-      if (res.status === 200) {
-        this.sessionList = res.body.data;
-        console.log(this.sessionList);
-        
-      }
+    this.isLoading = true;
+    this.employeeService.getPagedEmployees().subscribe(response => {
+    this.sessionList = response;
     },
       err => {
         this.isProgressBarLoading = false;
