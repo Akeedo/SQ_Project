@@ -16,13 +16,13 @@
                           <div class="col-6">
                             <div class="form-group mt-2">
                               <label class="required"   for="empCode">Emp Code</label>
-                              <input class="form-control"  [readonly]="role === 'Approver'"  formControlName="empCode" id="empCode" pInputText placeholder="{{'Emp Code'}}" type="text">
+                              <input class="form-control" [readonly]="role === 'Approver'"  formControlName="empCode" id="empCode" pInputText placeholder="{{'Emp Code'}}" type="text">
                             </div>
                           </div>
                           <div class="col-6">
                             <div class="form-group mt-2">
                               <label class="required" for="name">Name</label>
-                              <input class="form-control" [readonly]="role === 'Approver'" formControlName="name" id="name" pInputText placeholder="{{'Name'}}" type="text">
+                              <input class="form-control"   [readonly]="role === 'Approver'"  formControlName="name" id="name" pInputText placeholder="{{'Name'}}" type="text">
                             </div>
                           </div>
                         </div>
@@ -30,13 +30,13 @@
                           <div class="col-6">
                             <div class="form-group mt-2">
                               <label class="required" for="phoneNumber">Phone Number</label>
-                              <input class="form-control" [readonly]="role === 'Approver'" formControlName="phoneNumber" id="phoneNumber" pInputText placeholder="{{'Phone Number'}}" type="text">
+                              <input class="form-control"  [readonly]="role === 'Approver'"  formControlName="phoneNumber" id="phoneNumber" pInputText placeholder="{{'Phone Number'}}" type="text">
                             </div>
                           </div>
                           <div class="col-6">
                             <div class="form-group mt-2">
                               <label class="required" for="address">Address</label>
-                              <input class="form-control" [readonly]="role === 'Approver'" formControlName="address" id="address" pInputText placeholder="{{'Address'}}" type="text">
+                              <input class="form-control" [readonly]="role === 'Approver'"  formControlName="address" id="address" pInputText placeholder="{{'Address'}}" type="text">
                             </div>
                           </div>
                         </div>
@@ -81,7 +81,9 @@
                       <div class="form-group button-group">
                         <button (click)="onCancel()" class="p-button-info btn-cancel mr-3" icon="pi pi-times" label="{{'Cancel'}}" pButton pRipple type="button">
                         </button>
-                        <button (click)="onSubmit()" class="p-button-info" icon="pi pi-check" label="{{'Submit'}}" pButton pRipple type="button">
+                        <button  *ngIf="mode ==='CREATE'" (click)="onSubmit()" class="p-button-info" icon="pi pi-check" label="{{'Submit'}}" pButton pRipple type="button">
+                        </button>
+                        <button  *ngIf="mode === 'UPDATE' || mode === 'REVIEW'" (click)="onUpdate()" class="p-button-info" icon="pi pi-check" label="{{'Submit'}}" pButton pRipple type="button">
                         </button>
                     </div>
                 </form>

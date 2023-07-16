@@ -120,7 +120,7 @@ app.MapPost("/security/createToken",
         var token = tokenHandler.CreateToken(tokenDescriptor);
         var jwtToken = tokenHandler.WriteToken(token);
         var stringToken = tokenHandler.WriteToken(token);
-        return Results.Ok(new { token = stringToken, role = role });
+        return Results.Ok(new { token = stringToken });
     }
     return Results.Unauthorized();
 });

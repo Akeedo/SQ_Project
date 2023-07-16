@@ -57,7 +57,7 @@ export class CreateEmployeeComponent {
 
     ngOnInit(): void {
       this.setRole();
-      this.prepareAssetOperationForm(null);
+      this.prepareEmployeeOperationForm(null);
       this.initFeatures();
       this.getCompanies();
       this.getDepartments();
@@ -81,7 +81,7 @@ export class CreateEmployeeComponent {
       if (this.mode) {
         switch (this.mode) {
           case "CREATE": {
-            this.prepareAssetOperationForm(new Employee());
+            this.prepareEmployeeOperationForm(new Employee());
             break;
           }
   
@@ -92,6 +92,7 @@ export class CreateEmployeeComponent {
           }
           case "REVIEW": {
             this.getEmployeeById(this.activatedRoute.snapshot.paramMap.get("id"));
+             
             break;
           }
         }
@@ -99,7 +100,7 @@ export class CreateEmployeeComponent {
     }
 
     isInputDisabled(): boolean {
-      return this.role === 'Approver'; // Replace 'certainRole' with the role you want to check against
+      return this.role === 'Approver'; 
   }
 
     getEmployeeById(id: string) {
@@ -110,7 +111,7 @@ export class CreateEmployeeComponent {
             this.currentEmployee = res;
             console.log("Hello world");
             console.log(this.currentEmployee);
-            this.prepareAssetOperationForm(this.currentEmployee);
+            this.prepareEmployeeOperationForm(this.currentEmployee);
         },
         (err) => {
           this.isLoading = false;
@@ -128,13 +129,26 @@ export class CreateEmployeeComponent {
       );
     }
 
-    prepareAssetOperationForm(employee: Employee){
-      employee = employee ? employee : new Employee();
-      if(this.role === 'Approver'){
+    prepareEmployeeOperationForm(employee: Employee) {
+      employee = employee || new Employee();
+    
+      if (this.role === 'Approver') {
         employee.status = this.updateEmployeeStatus(employee.status);
       }
-      this.employeeGroup = this.fb.group({
-        empCode:[employee.empCode],
+    
+      this.employeeGroup = this.createEmployeeFormGroup(employee);
+    
+      if (this.role === 'Approver') {
+        this.disableControl('companyId');
+      }
+      
+      this.disableControl('departmentId');
+    }
+    
+    private createEmployeeFormGroup(employee: Employee) {
+      return this.fb.group({
+        id:           [employee.id],
+        empCode:      [employee.empCode],
         name:         [employee.name],
         phoneNumber:  [employee.phoneNumber],
         address:      [employee.address],
@@ -142,8 +156,12 @@ export class CreateEmployeeComponent {
         companyId:    [employee.companyId],
         departmentId: [employee.departmentId]
       });
-      this.employeeGroup.controls['departmentId'].disable();
     }
+    
+    private disableControl(controlName: string) {
+      this.employeeGroup.controls[controlName].disable();
+    }
+    
 
     updateEmployeeStatus(status: string): string {
       const option = this.optionsForApproval.find(opt => opt.value === status);
@@ -183,6 +201,49 @@ export class CreateEmployeeComponent {
       if (this.employeeGroup.valid) {
         this.employeeService
           .saveEmployee(this.employeeGroup.value)
+          .subscribe(
+            (res) => {
+              this.messageService.add({
+                  severity: "success",
+                  summary: "Employee saved Successfully",
+                  detail: "",
+                });
+                setTimeout(() => {
+                  this.router.navigate(["employee"]);
+                }, 200);
+              },
+            (err) => {
+              this.isLoading = false;
+              if (err.error && err.error.message) {
+                this.messageService.add({
+                  severity: "error",
+                  summary: err.error.message,
+                  detail: "",
+                });
+              }
+            },
+            () => {
+              this.isLoading = false;
+            }
+          );
+      } else {
+        this.isLoading = false;
+        this.messageService.add({
+          severity: "error",
+          summary: "Please fill up all the required fields",
+          detail: "",
+        });
+      }
+    }
+
+    onUpdate() {
+      this.isLoading = true;
+      if (this.employeeGroup.valid) {
+        this.employeeService
+        .updateEmployee(
+          this.employeeGroup.value,
+          this.activatedRoute.snapshot.paramMap.get("id")
+        )
           .subscribe(
             (res) => {
               this.messageService.add({
