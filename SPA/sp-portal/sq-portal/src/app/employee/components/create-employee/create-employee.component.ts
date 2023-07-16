@@ -19,7 +19,7 @@ export class CreateEmployeeComponent {
   public companies: any[];
   public departments: any[];
   public selectDepartments: any[];
-  isDropdownDisabled = true;
+  isDropdownDisabled= true;
   options: SelectItem[];
   optionsForApproval : SelectItem[];
   mode: string = 'CREATE';
@@ -141,7 +141,8 @@ export class CreateEmployeeComponent {
         status:       [employee.status],
         companyId:    [employee.companyId],
         departmentId: [employee.departmentId]
-      })
+      });
+      this.employeeGroup.controls['departmentId'].disable();
     }
 
     updateEmployeeStatus(status: string): string {
@@ -156,9 +157,9 @@ export class CreateEmployeeComponent {
 
     onSelectChange(selectedValue: any) {
     if (selectedValue) {
-        this.isDropdownDisabled = false;
+      this.employeeGroup.controls['departmentId'].enable();
       } else {
-        this.isDropdownDisabled = true;
+        this.employeeGroup.controls['departmentId'].disable();
       }
       this.selectDepartments = this.departments.filter(department => department.companyId == selectedValue);
     }

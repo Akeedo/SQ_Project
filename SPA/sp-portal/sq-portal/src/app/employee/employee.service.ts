@@ -14,6 +14,7 @@ export class EmployeeService {
   ) { }
 
   private apiURL: string = 'https://localhost:7186/api/v1/Employees';
+
   getPagedEmployees():  Observable<any[]> {
     const token = localStorage.getItem('jwtToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -25,17 +26,34 @@ export class EmployeeService {
   }
 
   saveEmployee(employee: any): Observable<any> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<any>(this.apiURL, employee,httpOptions);
+    const token = localStorage.getItem('jwtToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    const httpOptions = { headers: headers };
+    return this.http.post<any>(this.apiURL, employee,httpOptions,);
   }
 
   getEmployeeById(id: any): Observable<any> {
+    const token = localStorage.getItem('jwtToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  const options = { headers: headers };
+
     const url: string = this.apiURL + '/'+ id;
-    return this.http.get(url);
+    return this.http.get(url,options);
   }
 
   updateEmployee(emp: any, id:any): Observable<any> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  const token = localStorage.getItem('jwtToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    const httpOptions = { headers: headers };
     const url: string = this.apiURL + '/'+ id;
     return this.http.put<any>(url, emp, httpOptions);
   }

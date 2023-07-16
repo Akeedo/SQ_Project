@@ -25,6 +25,7 @@ namespace SQ_Project.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
             var employee = await _repository.GetEmployee(id);
@@ -39,6 +40,7 @@ namespace SQ_Project.Controllers
 
  
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Employee>> AddEmployee([FromBody] Employee employee)
         {
             var newEmployee = await _repository.AddEmployee(employee);
@@ -49,6 +51,7 @@ namespace SQ_Project.Controllers
 
  
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<ActionResult<Employee>> UpdateEmployee(int id, Employee employee)
         {
             if (id != employee.id)
@@ -60,6 +63,7 @@ namespace SQ_Project.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult<Employee>> DeleteEmployee(int id)
         {
             var employee = await _repository.DeleteEmployee(id);

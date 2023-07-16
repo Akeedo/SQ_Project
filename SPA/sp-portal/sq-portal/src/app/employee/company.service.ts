@@ -13,8 +13,11 @@ export class CompanyService {
 
 
   private apiURL: string = 'https://localhost:7186/api/Companies';
+
   getCompanies():  Observable<any[]> {
-    return this.http.get<any>(this.apiURL)
+    const token = localStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(this.apiURL,{headers})
     .pipe(
       map(res => res)  // if your response data is at the root level
     );

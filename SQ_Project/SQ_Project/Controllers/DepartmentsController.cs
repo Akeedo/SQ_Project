@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SQ_Project.Model;
 using SQ_Project.Repository;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace SQ_Project.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetDepartments()
         {
             var departments = await _repository.GetDepartments();
@@ -24,6 +26,7 @@ namespace SQ_Project.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Department>> GetDepartment(int id)
         {
             var department = await _repository.GetDepartment(id);
@@ -37,6 +40,7 @@ namespace SQ_Project.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Department>> AddDepartment([FromBody] Department department)
         {
             var newDepartment = await _repository.AddDepartment(department);
@@ -44,6 +48,7 @@ namespace SQ_Project.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<ActionResult<Department>> UpdateDepartment(int id, Department department)
         {
             if (id != department.id)
@@ -55,6 +60,7 @@ namespace SQ_Project.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult<Department>> DeleteDepartment(int id)
         {
             var department = await _repository.DeleteDepartment(id);

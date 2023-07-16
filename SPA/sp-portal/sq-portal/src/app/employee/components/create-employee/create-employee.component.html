@@ -42,29 +42,28 @@
                         </div>
                         <div class="row">
                           <div class="col-6">
-                                  <p-dropdown [options]="companies"
-                                  formControlName="companyId"  
-                                  (onChange)="onSelectChange($event.value)"  
-                                  [showClear]="true" 
-                                  id="id" optionLabel="name" optionValue="id"
-                                  placeholder="Select Company"
-                                  [filter]="true"
-                                  [readonly]="role === 'Approver'"
-                                  >
-                              </p-dropdown>
-                          </div>
-                          <div class="col-6">
-                          <p-dropdown 
-                            [disabled]="isDropdownDisabled" 
-                            [options]="selectDepartments" 
-                            formControlName="departmentId" 
-                            [showClear]="true" 
-                            id="id" optionLabel="name" optionValue="id"
-                            placeholder="Select Department"
-                            [filter]="true"
-                            [readonly]="role === 'Approver'"
+                            <p-dropdown [options]="companies"
+                                formControlName="companyId"
+                                (onChange)="onSelectChange($event.value)" 
+                                [showClear]="true"
+                                id="id" optionLabel="name" optionValue="id"
+                                placeholder="Select Company"
+                                [filter]="true"
                             >
-                          </p-dropdown>
+                            </p-dropdown>
+                        </div>
+                        <div class="col-6">
+                          
+                            <p-dropdown 
+                                [options]="selectDepartments" 
+                                formControlName="departmentId" 
+                                [showClear]="true"
+                                [disabled]="isDropdownDisabled"
+                                id="id" optionLabel="name" optionValue="id"
+                                placeholder="Select Department"
+                                [filter]="true"
+                            >
+                            </p-dropdown>
                         </div>
                       </div>
                       <br>
