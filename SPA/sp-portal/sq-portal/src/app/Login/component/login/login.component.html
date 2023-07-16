@@ -1,7 +1,27 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" formControlName="userName" required><br>
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" formControlName="password" required><br>
-    <input type="submit" value="Submit" [disabled]="!loginForm.valid">
-  </form>
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-md-12">
+          <!-- Add header here -->
+          <div class="header">
+            <h1>Employee Login</h1>
+          </div>
+
+          <div class="d-flex justify-content-between"></div>
+          <div class="card p-3">
+            <div class="form-container">
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="p-field form-field">
+                  <label for="username" class="form-label">Username:</label>
+                  <input type="text" id="username" formControlName="userName" pInputText required class="form-input">
+                </div>
+                <div class="p-field form-field">
+                  <label for="password" class="form-label">Password:</label>
+                  <input type="password" id="password" formControlName="password" pInputText required class="form-input">
+                </div>
+                <p-button type="submit" label="Submit" [disabled]="!loginForm.valid"></p-button>
+              </form>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>

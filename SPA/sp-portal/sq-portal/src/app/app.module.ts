@@ -25,7 +25,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CreateEmployeeComponent } from './employee/components/create-employee/create-employee.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UpdateEmployeeComponent } from './employee/components/update-employee/update-employee.component';
-import { HeaderComponent } from './header/component/header/header.component';
+
 import { LoginComponent } from './Login/component/login/login.component';
 
 export function createTranslateLoader(httpBackend: HttpBackend) {
@@ -39,7 +39,7 @@ export function createTranslateLoader(httpBackend: HttpBackend) {
     HomeComponent,
     CreateEmployeeComponent,
     UpdateEmployeeComponent,
-    HeaderComponent,
+
     LoginComponent
 
   ],
