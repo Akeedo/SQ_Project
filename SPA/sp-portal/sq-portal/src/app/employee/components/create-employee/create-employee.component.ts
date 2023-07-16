@@ -129,24 +129,12 @@ export class CreateEmployeeComponent {
       );
     }
 
-    prepareEmployeeOperationForm(employee: Employee) {
-      employee = employee || new Employee();
-    
-      if (this.role === 'Approver') {
+    prepareEmployeeOperationForm(employee: Employee){
+      employee = employee ? employee : new Employee();
+      if(this.role === 'Approver'){
         employee.status = this.updateEmployeeStatus(employee.status);
-      }
-    
-      this.employeeGroup = this.createEmployeeFormGroup(employee);
-    
-      if (this.role === 'Approver') {
-        this.disableControl('companyId');
-      }
-      
-      this.disableControl('departmentId');
-    }
-    
-    private createEmployeeFormGroup(employee: Employee) {
-      return this.fb.group({
+        }
+      this.employeeGroup = this.fb.group({
         id:           [employee.id],
         empCode:      [employee.empCode],
         name:         [employee.name],
@@ -156,12 +144,11 @@ export class CreateEmployeeComponent {
         companyId:    [employee.companyId],
         departmentId: [employee.departmentId]
       });
+      if(this.role === 'Approver'){
+      this.employeeGroup.controls['companyId'].disable(); 
+      }
+      this.employeeGroup.controls['departmentId'].disable();
     }
-    
-    private disableControl(controlName: string) {
-      this.employeeGroup.controls[controlName].disable();
-    }
-    
 
     updateEmployeeStatus(status: string): string {
       const option = this.optionsForApproval.find(opt => opt.value === status);
@@ -199,8 +186,10 @@ export class CreateEmployeeComponent {
     onSubmit() {
       this.isLoading = true;
       if (this.employeeGroup.valid) {
+        let employeeData = {...this.employeeGroup.value};
+        delete employeeData.id;
         this.employeeService
-          .saveEmployee(this.employeeGroup.value)
+          .saveEmployee(employeeData)
           .subscribe(
             (res) => {
               this.messageService.add({
