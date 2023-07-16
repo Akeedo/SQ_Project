@@ -25,11 +25,12 @@ export class EmployeeListComponent implements OnInit{
   public showAllList: boolean = true;
 
   @ViewChild('sessionSearchPopRef') sessionSearchPopRef: ElementRef;
-  public role: string = '';
+  role: string;
   public resetRequired: string = '';
   private defaultOffset: number = 0;
   private defaultLimit: number = this.rows;
   items: any;
+
 
   constructor(
     private router: Router,
@@ -39,14 +40,24 @@ export class EmployeeListComponent implements OnInit{
     private employeeService: EmployeeService
     ) {
       this.items = [
-        { label: 'CAAMS', url: '/' },
-        { label: 'Settings', url: '/designation' },
-        { label: 'Designation', url: '/designation' }
+        { label: 'SQ', url: '/' },
+        { label: 'Employees', url: '/employee' }
       ];
     }
 
   ngOnInit(): void {
-    
+    this.setRole();
+  }
+
+  setRole(){
+    const token = localStorage.getItem('jwtToken'); // replace 'your_token_key' with the key you used to store the token
+    const payloadBase64Url = token.split('.')[1];
+    const payloadBase64 = payloadBase64Url.replace('-', '+').replace('_', '/');
+    const payloadJson = atob(payloadBase64);
+    const payload = JSON.parse(payloadJson);
+
+    this.role = payload.role;
+    console.log(this.role);
   }
 
   createEmployee() {
@@ -88,6 +99,20 @@ export class EmployeeListComponent implements OnInit{
         this.isLoading = false;
       });
   }
+
+  updateEmployee(id: string) {
+    this.router.navigate(['update-employee', id], {
+      relativeTo: this.activatedRoute,
+      queryParams: { mode: 'UPDATE' }
+    })
+  };
+
+  reviewEmployee(id: string) {
+    this.router.navigate(['review-employee', id], {
+      relativeTo: this.activatedRoute,
+      queryParams: { mode: 'REVIEW' }
+    })
+  };
 
   
 }

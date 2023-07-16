@@ -15,8 +15,8 @@
                         <div class="row">
                           <div class="col-6">
                             <div class="form-group mt-2">
-                              <label class="required"   for="empCode">Emp Code</label>
-                              <input class="form-control" ng-disabled="all" formControlName="empCode" id="empCode" pInputText placeholder="{{'Emp Code'}}" type="text">
+                              <label class="required" for="empCode">Emp Code</label>
+                              <input class="form-control" formControlName="empCode" id="empCode" pInputText placeholder="{{'Emp Code'}}" type="text">
                             </div>
                           </div>
                           <div class="col-6">
@@ -40,41 +40,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-6">
-                                  <p-dropdown [options]="companies"
-                                  formControlName="companyId"  
-                                  (onChange)="onSelectChange($event.value)"  
-                                  [showClear]="true" 
-                                  id="id" optionLabel="name" optionValue="id"
-                                  placeholder="Select Company"
-                                  [filter]="true">
-                              </p-dropdown>
-                          </div>
-                          <div class="col-6">
-                          <p-dropdown 
-                            [disabled]="isDropdownDisabled" 
-                            [options]="selectDepartments" 
-                            formControlName="departmentId" 
-                            [showClear]="true" 
-                            id="id" optionLabel="name" optionValue="id"
-                            placeholder="Select Department"
-                            [filter]="true">
-                          </p-dropdown>
-                        </div>
                       </div>
-                      <br>
-                      <div class="row">
-                        <div class="col-md-2">
-                          <p-dropdown [options]="options" *ngIf="role === 'EntryOperator'" formControlName="status"></p-dropdown>
-                        </div>
-                        <div class="col-md-4"></div>
-                        <div class="col-md-2">
-                          <p-dropdown [options]="optionsForApproval" *ngIf="role === 'Approver'" formControlName="status"></p-dropdown>
-                        </div>
-                      </div>
-                      </div>
-                      <br>
                       <div class="form-group button-group">
                         <button (click)="onCancel()" class="p-button-info btn-cancel mr-3" icon="pi pi-times" label="{{'Cancel'}}" pButton pRipple type="button">
                         </button>

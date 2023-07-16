@@ -12,5 +12,9 @@ namespace SQ_Project.Model
         public string? name { get; set; }
         public string? phoneNumber { get; set; }
         public string? address { get; set; }
+
+        public string? status { get; set; }
+        public int? companyId { get; set; }
+        public int? departmentId { get; set; }
     }
 }

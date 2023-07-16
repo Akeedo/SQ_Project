@@ -4,6 +4,11 @@ import { HomeComponent } from './home/components/home/home.component';
 import { EmployeeListComponent } from './employee/components/employee-list/employee-list.component';
 
 const routes: Routes = [
+
+        {
+          path: '',
+          loadChildren: () => import('./Login/login-routing.module').then(mod => mod.LoginRoutingModule)
+        },
         {
           path: 'employee',
           loadChildren: () => import('./employee/employee-routing.module').then(mod => mod.EmployeeRoutingModule)

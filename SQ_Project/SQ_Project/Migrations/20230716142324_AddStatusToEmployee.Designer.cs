@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SQ_Project.Config;
 
@@ -11,9 +12,11 @@ using SQ_Project.Config;
 namespace SQ_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230716142324_AddStatusToEmployee")]
+    partial class AddStatusToEmployee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,12 +73,6 @@ namespace SQ_Project.Migrations
                     b.Property<string>("address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("companyId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("departmentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("empCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -86,8 +83,8 @@ namespace SQ_Project.Migrations
                     b.Property<string>("phoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("status")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("status")
+                        .HasColumnType("int");
 
                     b.HasKey("id");
 

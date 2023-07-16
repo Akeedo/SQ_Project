@@ -15,8 +15,9 @@ namespace SQ_Project.Controllers
         {
             _repository = repository;
         }
-
+       
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetEmployees()
         {
             var employees = await _repository.GetEmployees();
@@ -38,11 +39,12 @@ namespace SQ_Project.Controllers
 
  
         [HttpPost]
-        public async Task<ActionResult<Employee>> AddEmployee(Employee employee)
+        public async Task<ActionResult<Employee>> AddEmployee([FromBody] Employee employee)
         {
             var newEmployee = await _repository.AddEmployee(employee);
 
-            return CreatedAtAction(nameof(GetEmployee), new { id = newEmployee.id }, newEmployee);
+             return CreatedAtAction(nameof(GetEmployee), new { id = newEmployee.id }, newEmployee);
+           
         }
 
  

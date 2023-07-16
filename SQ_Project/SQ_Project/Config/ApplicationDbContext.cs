@@ -12,5 +12,7 @@ namespace SQ_Project.Config
         }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Department> Departments { get; set; }
     }
 }

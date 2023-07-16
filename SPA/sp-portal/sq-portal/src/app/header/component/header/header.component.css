@@ -1,0 +1,21 @@
+.navbar {
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+  
+  .nav-item {
+    margin-right: 1rem;
+  }
+  
+  .nav-link {
+    font-size: 1.1rem;
+    color: #fff !important;
+  }
+  
+  .nav-link:hover {
+    color: #ccc !important;
+  }
+  

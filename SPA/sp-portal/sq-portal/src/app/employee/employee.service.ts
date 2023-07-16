@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { resourceServerUrl } from 'src/common/constants/server-settings';
 import { getHttpHeaders } from 'src/common/constants/constants';
 import { Observable, map } from 'rxjs';
@@ -15,12 +15,29 @@ export class EmployeeService {
 
   private apiURL: string = 'https://localhost:7186/api/v1/Employees';
   getPagedEmployees():  Observable<any[]> {
+    const token = localStorage.getItem('jwtToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     //const url: string = `${resourceServerUrl}/v1/Employees`;
-    debugger
-    return this.http.get<any>(this.apiURL)
+    return this.http.get<any>(this.apiURL,{ headers })
     .pipe(
       map(res => res)  // if your response data is at the root level
     );
+  }
+
+  saveEmployee(employee: any): Observable<any> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.post<any>(this.apiURL, employee,httpOptions);
+  }
+
+  getEmployeeById(id: any): Observable<any> {
+    const url: string = this.apiURL + '/'+ id;
+    return this.http.get(url);
+  }
+
+  updateEmployee(emp: any, id:any): Observable<any> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    const url: string = this.apiURL + '/'+ id;
+    return this.http.put<any>(url, emp, httpOptions);
   }
   
 }

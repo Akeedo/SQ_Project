@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 100px;">
-                    <p-breadcrumb [model]=""></p-breadcrumb>
+                    <p-breadcrumb [model]="items"></p-breadcrumb>
                 </div>
             </div>
             <div class="d-flex justify-content-between">
@@ -56,10 +56,13 @@
                             <td class="text-truncate" data-toggle="tooltip" title="{{session?.phoneNumber}}">
                                 {{session?.phoneNumber}}</td>
                             <td class="text-center">
-                                <button class="p-button-rounded p-button-text" icon="pi pi-pencil" pButton
-                                    pTooltip="Update or Edit" style="color: white; background-color: #52854D"
-                                    type="button">
+                                <button (click)="updateEmployee(session?.id)" *ngIf="role === 'EntryOperator'" class="p-button-rounded btn-success mr-3" label="{{'Update'}}"
+                                pButton pRipple>
                                 </button>
+                            <button (click)="reviewEmployee(session?.id)" *ngIf="role === 'Approver'" class="p-button-rounded btn-success mr-3" label="{{'View'}}"
+                                pButton pRipple>
+                            </button>
+                                
                                 <!-- <button class="p-button-rounded p-button-text" icon="pi pi-trash" pButton pRipple
                                     pTooltip="Delete or Remove" style="color: white; background-color: #52854D"
                                     type="button" (click)="deleteDesignationById(session?.oid)"></button>  -->
