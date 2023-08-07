@@ -11,15 +11,15 @@
 /*-----------------------------------------------------
 Import font
 -------------------------------------------------------*/
-@font-face {
+/* @font-face {
     font-family: kite-display;
     src: url("../fonts/fonts/kitedisplay/Kite-Display-Bold.ttf");
-  }
+  } */
   
-  @font-face {
+  /* @font-face {
     font-family: forum;
     src: url("../fonts/fonts/forum/Forum-Regular.ttf");
-  }
+  } */
   
   /*----------------------------------------*/
   /*  1. Common

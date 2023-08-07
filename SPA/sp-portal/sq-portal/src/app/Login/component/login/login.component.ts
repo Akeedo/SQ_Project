@@ -30,10 +30,7 @@ export class LoginComponent implements OnInit {
   public loginDto = new Login();
 
   onSubmit(){
-    this.authService.login(this.loginForm.value).subscribe((res)=>{
-      localStorage.setItem('jwtToken', res.token);
-      });
-      this.router.navigate(["employee"]);
+    this.router.navigate(["home"]);
   }
 
 }

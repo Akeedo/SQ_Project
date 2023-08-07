@@ -1,15 +1,12 @@
-<div class="container-fluid">
+<div class="container-fluid myform">
   <div class="row">
-      <div class="col-md-12">
-          <!-- Add header here -->
-          <div class="header">
-            <h1>Employee Login</h1>
-          </div>
-
-          <div class="d-flex justify-content-between"></div>
-          <div class="card p-3">
-            <div class="form-container">
-              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="col-md-8">
+        <div class="card p-3 form-position">
+          <div class="form-container">
+            <div class="header">
+              <h1>Welcome!</h1>
+            </div>
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="left-aligned-form">
                 <div class="p-field form-field">
                   <label for="username" class="form-label">Username:</label>
                   <input type="text" id="username" formControlName="userName" pInputText required class="form-input">
@@ -20,6 +17,7 @@
                 </div>
                 <p-button type="submit" label="Submit" [disabled]="!loginForm.valid"></p-button>
               </form>
+              <img src="./../../../../assets/images/login_image.png" alt="Description of Image" class="login-image">
             </div>
           </div>
       </div>
