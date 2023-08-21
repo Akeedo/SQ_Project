@@ -14,6 +14,10 @@ const routes: Routes = [
           loadChildren: () => import('./home/home-routing.module').then(mod => mod.HomeRoutingModule)
         },
         {
+          path: 'recruitment-req-mgt',
+          loadChildren: () => import('./home/home-routing.module').then(mod => mod.HomeRoutingModule)
+        },
+        {
           path: 'employee',
           loadChildren: () => import('./employee/employee-routing.module').then(mod => mod.EmployeeRoutingModule)
         }

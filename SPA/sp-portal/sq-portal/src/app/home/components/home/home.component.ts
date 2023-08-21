@@ -8,12 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit{
   public screenWidth: any;
   public screenHeight: any;
-
+  sidebarVisible: boolean = false;
   constructor() {
   }
 
   ngOnInit() {
-    console.log("Hello Wolrd");
       this.screenWidth = window.innerWidth;
       this.screenHeight = window.innerHeight;
   }

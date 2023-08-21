@@ -8,6 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
 export class AppComponent implements OnInit{
   title = 'sq-portal';
   showHeader = true;
+  sidebarVisible: boolean = false;
 
   constructor(private router: Router) {}
 

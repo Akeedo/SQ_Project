@@ -27,6 +27,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UpdateEmployeeComponent } from './employee/components/update-employee/update-employee.component';
 
 import { LoginComponent } from './Login/component/login/login.component';
+import { HeaderComponent } from './common/components/header/header.component';
+import { SaveRecruitmentReqMgtComponent } from './recruitment-req-mgt/components/save-recruitment-req-mgt/save-recruitment-req-mgt.component';
+import { GetAllRecruitmentReqMgtComponent } from './recruitment-req-mgt/components/get-all-recruitment-req-mgt/get-all-recruitment-req-mgt.component';
+import { SidebarComponent } from './common/components/sidebar/sidebar.component';
+
 
 export function createTranslateLoader(httpBackend: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(httpBackend), './assets/i18n/', '.json');
@@ -40,7 +45,11 @@ export function createTranslateLoader(httpBackend: HttpBackend) {
     CreateEmployeeComponent,
     UpdateEmployeeComponent,
 
-    LoginComponent
+    LoginComponent,
+      HeaderComponent,
+      SaveRecruitmentReqMgtComponent,
+      GetAllRecruitmentReqMgtComponent,
+      SidebarComponent
 
   ],
   imports: [

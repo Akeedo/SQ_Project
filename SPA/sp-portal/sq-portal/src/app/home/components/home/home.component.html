@@ -1,1 +1,9 @@
-<p>home works!</p>
+<div class="container-scroller d-flex">
+    <app-sidebar></app-sidebar>
+    <div class="content-wrapper d-flex flex-column flex-grow-1">
+        <app-header></app-header>
+        <div class="all-content-wrapper flex-grow-1">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
