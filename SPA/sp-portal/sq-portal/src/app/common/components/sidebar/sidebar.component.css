@@ -2,10 +2,45 @@
     margin: 0;
     padding: 0;
     width: 200px;
-    background-color: #f1f1f1;
+    background-color: white;
     position: fixed;
     height: 100%;
     overflow: auto;
+    
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar {
+    scrollbar-width: none;
+}
+
+/* For IE and Edge */
+.sidebar {
+    -ms-overflow-style: none;
+}
+
+.sidebar-logo {
+    display: block;
+    max-width: 80%;    
+    height: auto;       
+    margin: 10px 20px 30px;
+    background-color: white;   
+}
+
+
+.sidebar ul {
+    list-style-type: none;
+    padding-left: 0; 
+}
+
+.sidebar ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 15px; 
 }
 
 .sidebar a {
@@ -16,22 +51,30 @@
 }
 
 .sidebar a.active {
-    background-color: #04AA6D;
+    background-color: #C3C3C3;
     color: white;
+    font-weight: bold;
 }
 
-.sidebar a:hover:not(.active) {
-    background-color: #555;
-    color: white;
+.sidebar li:hover {
+    background-color: #e6e6e6;
+}
+
+.sidebar li:hover a:not(.active) {
+    color: black; 
 }
 
 div.content {
     margin-left: 200px;
     padding: 1px 16px;
     height: 1000px;
-  }
-  
-  @media screen and (max-width: 700px) {
+}
+
+.left-arrow {
+    margin-right: 20px;
+}
+
+@media screen and (max-width: 700px) {
         .sidebar {
         width: 100%;
         height: auto;
@@ -40,10 +83,10 @@ div.content {
         .sidebar a {float: left;}
         div.content {margin-left: 0;}
     }
-  
-@media screen and (max-width: 400px) {
+
+    @media screen and (max-width: 400px) {
     .sidebar a {
         text-align: center;
         float: none;
     }
-  }
+}

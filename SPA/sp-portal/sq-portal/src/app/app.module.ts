@@ -33,6 +33,7 @@ import { GetAllRecruitmentReqMgtComponent } from './recruitment-req-mgt/componen
 import { SidebarComponent } from './common/components/sidebar/sidebar.component';
 
 
+
 export function createTranslateLoader(httpBackend: HttpBackend) {
   return new TranslateHttpLoader(new HttpClient(httpBackend), './assets/i18n/', '.json');
 }
