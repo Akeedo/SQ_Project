@@ -43,15 +43,23 @@
     padding-right: 15px; 
 }
 
-.sidebar a {
+.sidebar li a {
     display: block;
     color: black;
     padding: 16px;
     text-decoration: none;
 }
 
-.sidebar a.active {
+.sidebar li.active{
     background-color: #C3C3C3;
+}
+
+.sidebar li.active a {
+    color: white;
+    font-weight: bold;
+}
+
+.sidebar li.active i {
     color: white;
     font-weight: bold;
 }
@@ -64,6 +72,26 @@
     color: black; 
 }
 
+.sidebar li:hover i:not(.active) {
+    color: black; 
+}
+
+.sidebar li .sub-menu{
+    background-color: red;
+    position: absolute;
+    padding: 10px 20px;
+    opacity: 1; 
+    visibility: hidden;
+    left: 100%;
+    top: 0px;
+    transition: all 0.4s ease; 
+}
+
+.sidebar li:hover .sub-menu{
+    opacity: 1;
+    visibility: visible; /* Add this */
+}
+
 div.content {
     margin-left: 200px;
     padding: 1px 16px;
@@ -73,6 +101,10 @@ div.content {
 .left-arrow {
     margin-right: 20px;
 }
+
+
+
+/* Media Screen */
 
 @media screen and (max-width: 700px) {
         .sidebar {
