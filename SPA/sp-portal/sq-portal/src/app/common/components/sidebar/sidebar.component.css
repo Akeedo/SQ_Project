@@ -5,8 +5,7 @@
     background-color: white;
     position: fixed;
     height: 100%;
-    overflow: auto;
-    
+    overflow: auto;   
 }
 
 .sidebar::-webkit-scrollbar {
