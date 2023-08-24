@@ -2,11 +2,12 @@
 
 body{
     background-color: #D9D9D9;
+    height: 100%;
 }
 
-.container-scroller {
+/* .container-scroller {
     height: 100vh;
-}
+} */
 
 app-sidebar {
     flex-shrink: 0;

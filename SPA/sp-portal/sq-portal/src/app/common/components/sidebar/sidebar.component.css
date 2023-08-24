@@ -1,11 +1,19 @@
+.menu-container {
+    width: 200px;; /* Adjust based on the combined width of sidebar and sub-menu */
+    height: 100%;
+    min-height: 150vh;
+    overflow-x: auto; /* Allows horizontal scrolling */
+    top: 0;
+    left: 0;
+    background-color: white;
+}
+
+
 .sidebar {
     margin: 0;
     padding: 0;
     width: 200px;
-    background-color: white;
-    position: fixed;
-    height: 100%;
-    overflow: auto;   
+    background-color: white;   
 }
 
 .sidebar::-webkit-scrollbar {
@@ -75,20 +83,68 @@
     color: black; 
 }
 
-.sidebar li .sub-menu{
-    background-color: red;
-    position: absolute;
-    padding: 10px 20px;
-    opacity: 1; 
-    visibility: hidden;
-    left: 100%;
-    top: 0px;
-    transition: all 0.4s ease; 
+/* Reset list styles */
+.sub-menu {
+    /* display: none;  */
+    display: flex;
+    flex-direction: column;
+    list-style-type: none; 
+    max-width: 270px;
+    background-color: white;
+    list-style-type: none;
+    border-radius: 25px;
+    position: absolute;  
+    left: 120px;
+    padding:20px 0 10px 20px;
+    margin-top: 50px; 
+    -webkit-animation:slide-right .25s cubic-bezier(.25,.46,.45,.94) both;animation:slide-right .5s cubic-bezier(.25,.46,.45,.94) both;   
+}
+@-webkit-keyframes slide-right{0%{-webkit-transform:translateX(0);transform:translateX(0)}100%{-webkit-transform:translateX(100px);transform:translateX(100px)}}@keyframes slide-right{0%{-webkit-transform:translateX(0);transform:translateX(0)}100%{-webkit-transform:translateX(100px);transform:translateX(100px)}}
+
+/* .sub-menu li {
+    margin-bottom: 10px;
+} */
+
+.sub-menu > li {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;             
+    position: relative;              
+    padding: 10px 0;   
+    margin-bottom: 10px;             
 }
 
-.sidebar li:hover .sub-menu{
-    opacity: 1;
-    visibility: visible; /* Add this */
+
+.sub-menu a, .sub-menu .pi {
+    padding: 0 10px;
+}
+
+.sub-menu .pi {
+    cursor: pointer;
+}
+
+.sub-menu > li > .sub-menu {
+    display: none; 
+    position: absolute;
+    top: 0; 
+    left: 70%; 
+    background-color: white; 
+    border: 1px solid #ccc; 
+    min-width: 200px;     
+}
+
+.sub-menu > li:hover > .sub-menu {
+    display: flex;
+}
+
+.sub-menu li:hover {
+    margin-left: 10px;
+    background-color: #C3C3C3;
+    border-radius: 10px;
+}
+
+.sub-menu li a{
+    margin: 0 0 0 20px;
 }
 
 div.content {
